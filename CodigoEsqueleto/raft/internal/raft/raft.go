@@ -25,13 +25,14 @@ package raft
 
 import (
 	"fmt"
-	"io/ioutil"
+	"io"
 	"log"
 	"os"
 	//"crypto/rand"
 	"sync"
 	"time"
 	//"net/rpc"
+	"math/rand"
 
 	"raft/internal/comun/rpctimeout"
 )
@@ -87,6 +88,9 @@ type NodoRaft struct {
 	HearbeatChannel chan bool
 	MyVotes int
 	LeaderChannel chan bool
+	Replies int
+	OperacionChannel chan AplicaOperacion
+	Committed chan string
 
 	// mirar figura 2 para descripción del estado que debe mantenre un nodo Raft
 	CurrentTerm int
@@ -126,6 +130,22 @@ func NuevoNodo(nodos []rpctimeout.HostPort, yo int,
 	nr.Nodos = nodos
 	nr.Yo = yo
 	nr.IdLider = -1
+	nr.Rol = "follower"
+	nr.FollowerChannel = make(chan bool)
+	nr.HearbeatChannel = make(chan bool)
+	nr.MyVotes = 0
+	nr.LeaderChannel = make(chan bool)
+	nr.Replies = 0
+	nr.OperacionChannel = canalAplicarOperacion
+	nr.Committed = make(chan string)
+
+	// mirar figura 2 para descripción del estado que debe mantenre un nodo Raft
+	nr.CurrentTerm = 0
+	nr.VotedFor = -1
+	nr.CommitIndex = -1
+	nr.LastApplied = -1
+	nr.NextIndex = make([]int, 3)
+	nr.MatchIndex = make([]int, 3)
 
 	if kEnableDebugLogs {
 		nombreNodo := nodos[yo].Host() + "_" + nodos[yo].Port()
@@ -151,10 +171,11 @@ func NuevoNodo(nodos []rpctimeout.HostPort, yo int,
 		}
 		nr.Logger.Println("logger initialized")
 	} else {
-		nr.Logger = log.New(ioutil.Discard, "", 0)
+		nr.Logger = log.New(io.Discard, "", 0)
 	}
 
 	// Añadir codigo de inicialización
+	go raftStates()
 	
 
 	return nr
@@ -183,7 +204,7 @@ func (nr *NodoRaft) obtenerEstado() (int, int, bool, int) {
 	var esLider bool
 	var idLider int =nr.IdLider
 	
-
+	esLider = nr.Yo==nr.IdLider
 	// Vuestro codigo aqui
 	
 
@@ -475,4 +496,145 @@ func (nr *NodoRaft) enviarHeartbeat(nodo int, args *ArgAppendEntries,
 }
 
 
-func (nr *NodoRaft) nuevaEntrada(nodo int, args)
+func (nr *NodoRaft) nuevaEntrada(nodo int, args *ArgAppendEntries,
+	result *Results) bool {
+
+	error := nr.Nodos[nodo].CallTimeout("NodoRaft.AppendEntries", args, result, 10*time.Millisecond)
+	if(error != nil){
+		return false
+	}else{
+		if(result.Success){
+			nr.MatchIndex[nodo] = nr.NextIndex[nodo]
+			nr.NextIndex[nodo]++
+			nr.Mux.Lock()
+			if(nr.MatchIndex[nodo] > nr.CommitIndex){
+				nr.Replies++
+				if(nr.Replies == len(nr.Nodos)/2){
+					nr.CommitIndex++
+					nr.Replies=0
+				}
+			}
+			nr.Mux.Unlock()
+		}else{
+			nr.NextIndex[nodo]--
+		}
+		return true
+	}
+}
+
+func requestVotes(nr *NodoRaft){
+	var reply RespuestaPeticionVoto
+	for i:=0 ; i<len(nr.Nodos); i++{
+		if(i!=nr.Yo){
+			if(len(nr.Log)!=0 ){
+				lastLogIndex :=len(nr.Log)-1
+				lastLogTerm :=nr.Log[lastLogIndex].Mandato
+				go nr.enviarPeticionVoto(i, &ArgsPeticionVoto{nr.CurrentTerm,nr.Yo, lastLogIndex, lastLogTerm}, &reply)
+			}else{
+				go nr.enviarPeticionVoto(i, &ArgsPeticionVoto{nr.CurrentTerm,nr.Yo, -1, 0}, &reply)
+			}
+		}
+	}
+}
+
+func sendAppendEntries(nr *NodoRaft){
+	var result Results
+	for i:=0; i<len(nr.Nodos); i++{
+		if(i != nr.Yo){
+			if(len(nr.Log)-1 >= nr.NextIndex[i]){
+				var entries []Entry 
+				entries[0]= Entry{nr.NextIndex[i], nr.Log[nr.NextIndex[i]].Mandato, nr.Log[nr.NextIndex[i]].Operacion}
+				if(nr.NextIndex[i]!=0){
+					prevLogIndex := nr.NextIndex[i]-1
+					prevLogTerm := nr.Log[prevLogIndex].Mandato
+					go nr.nuevaEntrada(i, &ArgAppendEntries{nr.CurrentTerm,nr.Yo,prevLogIndex,prevLogTerm, entries,nr.CommitIndex},&result)
+				}else{
+					go nr.nuevaEntrada(i, &ArgAppendEntries{nr.CurrentTerm,nr.Yo,-1,0, entries,nr.CommitIndex},&result)
+
+				}
+			}else{
+				var entries []Entry
+				if(nr.NextIndex[i]!=0){
+					prevLogIndex := nr.NextIndex[i]-1
+					prevLogTerm := nr.Log[prevLogIndex].Mandato
+					go nr.nuevaEntrada(i, &ArgAppendEntries{nr.CurrentTerm,nr.Yo,prevLogIndex,prevLogTerm, entries,nr.CommitIndex},&result)
+
+				}else{
+					go nr.nuevaEntrada(i, &ArgAppendEntries{nr.CurrentTerm,nr.Yo,-1,0, entries,nr.CommitIndex},&result)
+
+				}
+			}
+		}
+	
+	}
+}
+
+func raftStates(nr *NodoRaft){
+	for{
+		if(nr.CommitIndex > nr.LastApplied){
+			nr.LastApplied++
+			operacion := AplicaOperacion{nr.LastApplied, nr.Log[nr.LastApplied].Operacion}
+			nr.OperacionChannel <- operacion
+		}
+
+		for nr.Rol == "follower"{
+			select{
+			case <-nr.HearbeatChannel:
+				nr.Rol = "follower"
+			case <-time.After(time.Duration(rand.Intn(401)+100) * time.Millisecond):
+				nr.IdLider = -1
+				nr.Rol = "candidate"
+			}
+		}
+
+		for nr.Rol == "candidate"{
+			if(nr.CommitIndex > nr.LastApplied){
+				nr.LastApplied++
+				operacion := AplicaOperacion{nr.LastApplied, nr.Log[nr.LastApplied].Operacion}
+				nr.OperacionChannel <- operacion
+			}
+
+			nr.CurrentTerm++
+			nr.VotedFor = nr.Yo
+			nr.MyVotes = 1
+			timer := time.NewTimer(time.Duration(rand.Intn(401)+100) * time.Millisecond)
+			requestVotes(nr)
+			select{
+			case <-nr.HearbeatChannel:
+				nr.Rol = "follower"
+			case <- nr.FollowerChannel:
+				nr.Rol = "follower"
+			case <-timer.C:
+				nr.Rol = "candidate"
+			case <-nr.LeaderChannel:
+				for i:=0; i<len(nr.Nodos); i++{
+					if(i!=nr.Yo){
+						nr.NextIndex[i] = len(nr.Log)
+						nr.MatchIndex[i] = -1
+					}
+				}
+				nr.Rol = "leader"
+			}
+		}
+		for nr.Rol =="leader"{
+			nr.IdLider = nr.Yo
+			sendAppendEntries(nr)
+			timer := time.NewTimer(50*time.Millisecond)
+			select{
+			case <-nr.FollowerChannel:
+				nr.Rol = "follower"
+			case <-timer.C:
+				if(nr.CommitIndex>nr.LastApplied){
+					nr.LastApplied++
+					operacion := AplicaOperacion{nr.LastApplied, nr.Log[nr.LastApplied].Operacion}
+					nr.OperacionChannel <- operacion
+					operacion = <- nr.OperacionChannel
+					nr.Committed <- operacion.Operacion.Valor
+
+				}
+				nr.Rol = "leader"
+			}
+		}
+	}
+}
+
