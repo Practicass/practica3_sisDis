@@ -175,7 +175,7 @@ func NuevoNodo(nodos []rpctimeout.HostPort, yo int,
 	}
 
 	// Añadir codigo de inicialización
-	go raftStates()
+	go raftStates(nr)
 	
 
 	return nr
