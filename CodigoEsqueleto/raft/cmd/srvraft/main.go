@@ -34,7 +34,6 @@ func main() {
 	
 	// Parte Servidor
 	nr := raft.NuevoNodo(nodos, me, make(chan raft.AplicaOperacion, 1000))
-	fmt.Println("hola")
 	rpc.Register(nr)
 	
 	
