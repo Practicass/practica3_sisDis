@@ -237,7 +237,7 @@ func (cfg *configDespliegue) falloAnteriorElegirNuevoLiderTest3(t *testing.T) {
 
 // 3 operaciones comprometidas con situacion estable y sin fallos - 3 NODOS RAFT
 func (cfg *configDespliegue) tresOperacionesComprometidasEstable(t *testing.T) {
-	t.Skip("SKIPPED tresOperacionesComprometidasEstable")
+	//t.Skip("SKIPPED tresOperacionesComprometidasEstable")
 
 	// A completar ???
 	fmt.Println(t.Name(), ".....................")
@@ -248,7 +248,10 @@ func (cfg *configDespliegue) tresOperacionesComprometidasEstable(t *testing.T) {
 	fmt.Printf("Probando lider en curso\n")
 	cfg.pruebaUnLider(3)
 
-	cfg.compromete
+	fmt.Printf("Sometiendo operaciones\n")
+	cfg.pruebaComprometerOperacion(0, "escribir", "x", "3", "ok")
+	cfg.pruebaComprometerOperacion(1, "escribir", "y", "1", "ok")
+	cfg.pruebaComprometerOperacion(2, "leer", "x", "", "3")
 
 
 	// Parar réplicas alamcenamiento en remoto
@@ -381,7 +384,7 @@ func (cfg *configDespliegue) startDistributedProcesses() {
 	}
 
 	// aproximadamente 500 ms para cada arranque por ssh en portatil
-	time.Sleep(300 * time.Millisecond) //PARA TEST 1
+	time.Sleep(650 * time.Millisecond) //PARA TEST 1
 	
 }
 
@@ -437,17 +440,21 @@ func (cfg *configDespliegue) pararLider() {
 		}
 }
 
-func (cfg *configDespliegue) pruebaComprometerOperacion() {
-	var reply raft.Vacio
-		for i, endPoint := range cfg.nodosRaft {
-			if i == cfg.lider {
-				err := endPoint.CallTimeout("NodoRaft.ParaNodo", raft.Vacio{},
-				&reply, 10*time.Millisecond)
-				check.CheckError(err, "Error en llamada RPC ParaNodo")
-				cfg.conectados[i] = false
-				
-				fmt.Println(cfg.conectados) 
-			}
-		}
+func (cfg *configDespliegue) pruebaComprometerOperacion(indice int,
+	operacion string, clave string, valor string, respuesta string) {
+	var reply raft.ResultadoRemoto
+	
+	err := cfg.nodosRaft[cfg.lider].CallTimeout("NodoRaft.SometerOperacionRaft",
+	raft.TipoOperacion{operacion, clave, valor}, &reply,
+	5000*time.Millisecond)
+	check.CheckError(err, "Error en llamada RPC SometerOperacionRaft")
+	cfg.lider = reply.IdLider
+	if(reply.IndiceRegistro != indice || reply.ValorADevolver != valor){
+		cfg.t.Fatalf("Operacion comprometida incorrectamente en %d en subtest %s",
+													indice, cfg.t.Name())
+	}
+	
+
+	
 }
 

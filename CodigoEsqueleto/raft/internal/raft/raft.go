@@ -657,7 +657,7 @@ func raftStates(nr *NodoRaft){
 					nr.LastApplied++
 					//nr.Logger.Println("timer-leader2", nr.CommitIndex, nr.LastApplied)
 					operacion := AplicaOperacion{nr.LastApplied, nr.Log[nr.LastApplied].Operacion}
-					//nr.Logger.Println("timer-leader3", nr.CommitIndex, nr.LastApplied)
+					nr.Logger.Println("timer-leader3", nr.CommitIndex, nr.LastApplied)
 					nr.OperacionChannel <- operacion
 					operacion = <- nr.OperacionChannel
 					nr.Committed <- operacion.Operacion.Valor
