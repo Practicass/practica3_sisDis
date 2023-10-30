@@ -56,6 +56,7 @@ func main() {
 func realizarOperacion(almacen map[string]string, canal chan raft.AplicaOperacion) {
 	for {
 		operacion := <- canal
+		fmt.Println(operacion)
 		if operacion.Operacion.Operacion == "leer" {
 			operacion.Operacion.Valor = almacen[operacion.Operacion.Clave]
 		} else if operacion.Operacion.Operacion == "escribir" {

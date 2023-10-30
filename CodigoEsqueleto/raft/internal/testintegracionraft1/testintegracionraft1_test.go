@@ -133,6 +133,8 @@ type configDespliegue struct {
 	numReplicas int
 	nodosRaft []rpctimeout.HostPort
 	cr canalResultados
+
+	lider int
 }
 
 // Crear una configuracion de despliegue
@@ -171,6 +173,7 @@ func (cfg *configDespliegue) soloArranqueYparadaTest1(t *testing.T) {
 	cfg.startDistributedProcesses()
 
 	// Comprobar estado replica 0
+	
 	cfg.comprobarEstadoRemoto (0, 0, false, -1)
 
 	// Comprobar estado replica 1
@@ -178,6 +181,7 @@ func (cfg *configDespliegue) soloArranqueYparadaTest1(t *testing.T) {
 
 	// Comprobar estado replica 2
 	cfg.comprobarEstadoRemoto (2, 0, false, -1)
+	 
 
 	// Parar réplicas almacenamiento en remoto
 	cfg.stopDistributedProcesses()
@@ -187,7 +191,7 @@ func (cfg *configDespliegue) soloArranqueYparadaTest1(t *testing.T) {
 
 // Primer lider en marcha - 3 NODOS RAFT
 func (cfg *configDespliegue) elegirPrimerLiderTest2(t *testing.T) {
-	t.Skip("SKIPPED ElegirPrimerLiderTest2")
+	//t.Skip("SKIPPED ElegirPrimerLiderTest2")
 
 	fmt.Println(t.Name(), ".....................")
 
@@ -206,7 +210,7 @@ func (cfg *configDespliegue) elegirPrimerLiderTest2(t *testing.T) {
 
 // Fallo de un primer lider y reeleccion de uno nuevo - 3 NODOS RAFT
 func (cfg *configDespliegue) falloAnteriorElegirNuevoLiderTest3(t *testing.T) {
-	t.Skip("SKIPPED FalloAnteriorElegirNuevoLiderTest3")
+	//t.Skip("SKIPPED FalloAnteriorElegirNuevoLiderTest3")
 
 	fmt.Println(t.Name(), ".....................")
 
@@ -218,10 +222,12 @@ func (cfg *configDespliegue) falloAnteriorElegirNuevoLiderTest3(t *testing.T) {
 
 	// Desconectar lider
 	// ???
+	cfg.pararLider()
+	
 
 	fmt.Printf("Comprobar nuevo lider\n")
 	cfg.pruebaUnLider(3)
-	
+	//time.Sleep(1000 * time.Millisecond)
 
 	// Parar réplicas almacenamiento en remoto
 	cfg.stopDistributedProcesses()  //parametros
@@ -234,6 +240,22 @@ func (cfg *configDespliegue) tresOperacionesComprometidasEstable(t *testing.T) {
 	t.Skip("SKIPPED tresOperacionesComprometidasEstable")
 
 	// A completar ???
+	fmt.Println(t.Name(), ".....................")
+
+	cfg.startDistributedProcesses()
+
+	// Se ha elegido lider ?
+	fmt.Printf("Probando lider en curso\n")
+	cfg.pruebaUnLider(3)
+
+	cfg.compromete
+
+
+	// Parar réplicas alamcenamiento en remoto
+	cfg.stopDistributedProcesses()   // Parametros
+
+	fmt.Println(".............", t.Name(), "Superado")
+
 }
 
 // Se consigue acuerdo a pesar de desconexiones de seguidor -- 3 NODOS RAFT
@@ -295,14 +317,16 @@ func(cfg *configDespliegue) SometerConcurrentementeOperaciones(t *testing.T) {
 // probar varias veces si se necesitan reelecciones
 func (cfg *configDespliegue) pruebaUnLider(numreplicas int) int {
 	for iters := 0; iters < 10; iters++ {
-		time.Sleep(500 * time.Millisecond)
+		time.Sleep(50 * time.Millisecond)
 		mapaLideres := make(map[int][]int)
 		for i := 0; i < numreplicas; i++ {
 			if cfg.conectados[i] {
+				
 				if _, mandato, eslider, _ := cfg.obtenerEstadoRemoto(i);
 																	  eslider {
 					mapaLideres[mandato] = append(mapaLideres[mandato], i)
 				}
+				
 			}
 		}
 
@@ -318,8 +342,10 @@ func (cfg *configDespliegue) pruebaUnLider(numreplicas int) int {
 		}
 
 		if len(mapaLideres) != 0 {
-			
-			return mapaLideres[ultimoMandatoConLider][0]  // Termina
+			lider:=mapaLideres[ultimoMandatoConLider][0]
+			cfg.lider = lider
+			//fmt.Println(lider)
+			return lider  // Termina
 			
 		}
 	}
@@ -351,21 +377,34 @@ func (cfg *configDespliegue) startDistributedProcesses() {
 
 		// dar tiempo para se establezcan las replicas
 		//time.Sleep(500 * time.Millisecond)
+		
 	}
 
 	// aproximadamente 500 ms para cada arranque por ssh en portatil
-	time.Sleep(2500 * time.Millisecond)
+	time.Sleep(300 * time.Millisecond) //PARA TEST 1
+	
 }
 
 //
 func (cfg *configDespliegue) stopDistributedProcesses() {
 	var reply raft.Vacio
 
-	for _, endPoint := range cfg.nodosRaft {
-		err := endPoint.CallTimeout("NodoRaft.ParaNodo",
+	for i, endPoint := range cfg.nodosRaft {
+		if(cfg.conectados[i] == true){
+			err := endPoint.CallTimeout("NodoRaft.ParaNodo",
 								raft.Vacio{}, &reply, 10 * time.Millisecond)
 		check.CheckError(err, "Error en llamada RPC Para nodo")
+		}
+		
 	}
+	//for _, endPoint := range cfg.nodosRaft {
+	//	
+	//	err := endPoint.CallTimeout("NodoRaft.ParaNodo",
+	//							raft.Vacio{}, &reply, 10 * time.Millisecond)
+	//	check.CheckError(err, "Error en llamada RPC Para nodo")
+	//	
+	//	
+	//}
 }
 
 // Comprobar estado remoto de un nodo con respecto a un estado prefijado
@@ -382,3 +421,33 @@ func (cfg *configDespliegue) comprobarEstadoRemoto(idNodoDeseado int,
 	}
 
 }
+
+
+func (cfg *configDespliegue) pararLider() {
+	var reply raft.Vacio
+		for i, endPoint := range cfg.nodosRaft {
+			if i == cfg.lider {
+				err := endPoint.CallTimeout("NodoRaft.ParaNodo", raft.Vacio{},
+				&reply, 10*time.Millisecond)
+				check.CheckError(err, "Error en llamada RPC ParaNodo")
+				cfg.conectados[i] = false
+				
+				fmt.Println(cfg.conectados) 
+			}
+		}
+}
+
+func (cfg *configDespliegue) pruebaComprometerOperacion() {
+	var reply raft.Vacio
+		for i, endPoint := range cfg.nodosRaft {
+			if i == cfg.lider {
+				err := endPoint.CallTimeout("NodoRaft.ParaNodo", raft.Vacio{},
+				&reply, 10*time.Millisecond)
+				check.CheckError(err, "Error en llamada RPC ParaNodo")
+				cfg.conectados[i] = false
+				
+				fmt.Println(cfg.conectados) 
+			}
+		}
+}
+

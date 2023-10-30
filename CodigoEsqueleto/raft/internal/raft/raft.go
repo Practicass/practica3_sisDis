@@ -191,6 +191,13 @@ func (nr *NodoRaft) para() {
 	go func() {time.Sleep(5 * time.Millisecond); os.Exit(0) } ()
 }
 
+
+func (nr *NodoRaft) duerme() {
+	nr.Rol=""
+	go func() {time.Sleep(50 * time.Millisecond);nr.Rol="leader"; os.Exit(0) } ()
+	
+}
+
 // Devuelve "yo", mandato en curso y si este nodo cree ser lider
 //
 // Primer valor devuelto es el indice de este  nodo Raft el el conjunto de nodos 
@@ -200,8 +207,8 @@ func (nr *NodoRaft) para() {
 // Cuarto valor es el lider, es el indice del líder si no es él
 func (nr *NodoRaft) obtenerEstado() (int, int, bool, int) {
 	var yo int = nr.Yo
-	var mandato int
-	var esLider bool
+	var mandato int = nr.CurrentTerm
+	var esLider bool 
 	var idLider int =nr.IdLider
 	
 	esLider = nr.Yo==nr.IdLider
@@ -234,11 +241,22 @@ func (nr *NodoRaft) someterOperacion(operacion TipoOperacion) (int, int,
 	EsLider := false
 	idLider := -1
 	valorADevolver := ""
-	
+	nr.Logger.Println("someter")
 
 	// Vuestro codigo aqui
+	if EsLider = nr.Yo==nr.IdLider; EsLider {
+		indice = len(nr.Log)
+		mandato = nr.CurrentTerm
+		entry := Entry{indice, mandato, operacion}
+		nr.Log = append(nr.Log, entry)
+		idLider = nr.Yo
+		nr.Mux.Unlock()
+		valorADevolver = <-nr.Committed
+	} else {
+		nr.Mux.Unlock()
+		idLider = nr.IdLider
 	
-
+	}
 	return indice, mandato, EsLider, idLider, valorADevolver
 }
 
@@ -251,6 +269,10 @@ type Vacio struct{}
 
 func (nr * NodoRaft) ParaNodo(args Vacio, reply *Vacio) error {
 	defer nr.para()
+	return nil
+}
+func (nr * NodoRaft) DuermeNodo(args Vacio, reply *Vacio) error {
+	defer nr.duerme()
 	return nil
 }
 
@@ -333,6 +355,7 @@ func (nr *NodoRaft) PedirVoto(peticion *ArgsPeticionVoto,
 			nr.CurrentTerm = peticion.Term
 			nr.VotedFor = peticion.CandidateId
 			reply.Term = nr.CurrentTerm
+			reply.VoteGranted = true
 		}else{
 			nr.CurrentTerm = peticion.Term
 			nr.VotedFor = nr.CurrentTerm
@@ -571,6 +594,7 @@ func sendAppendEntries(nr *NodoRaft){
 
 func raftStates(nr *NodoRaft){
 	for{
+		nr.Logger.Println("EMPIEZAAA", nr.CommitIndex, nr.LastApplied)
 		if(nr.CommitIndex > nr.LastApplied){
 			nr.LastApplied++
 			operacion := AplicaOperacion{nr.LastApplied, nr.Log[nr.LastApplied].Operacion}
@@ -578,16 +602,19 @@ func raftStates(nr *NodoRaft){
 		}
 
 		for nr.Rol == "follower"{
+			nr.Logger.Println("soyFollower")
 			select{
 			case <-nr.HearbeatChannel:
+				nr.Logger.Println("reciboHeartbeat")
 				nr.Rol = "follower"
-			case <-time.After(time.Duration(rand.Intn(401)+100) * time.Millisecond):
+			case <-time.After(time.Duration(rand.Intn(101)+100) * time.Millisecond):
 				nr.IdLider = -1
 				nr.Rol = "candidate"
 			}
 		}
 
 		for nr.Rol == "candidate"{
+			nr.Logger.Println("soyCandidate", nr.CommitIndex, nr.LastApplied)
 			if(nr.CommitIndex > nr.LastApplied){
 				nr.LastApplied++
 				operacion := AplicaOperacion{nr.LastApplied, nr.Log[nr.LastApplied].Operacion}
@@ -597,7 +624,7 @@ func raftStates(nr *NodoRaft){
 			nr.CurrentTerm++
 			nr.VotedFor = nr.Yo
 			nr.MyVotes = 1
-			timer := time.NewTimer(time.Duration(rand.Intn(401)+100) * time.Millisecond)
+			timer := time.NewTimer(time.Duration(rand.Intn(101)+100) * time.Millisecond)
 			requestVotes(nr)
 			select{
 			case <-nr.HearbeatChannel:
@@ -617,6 +644,7 @@ func raftStates(nr *NodoRaft){
 			}
 		}
 		for nr.Rol =="leader"{
+			nr.Logger.Println("soyLeader")
 			nr.IdLider = nr.Yo
 			sendAppendEntries(nr)
 			timer := time.NewTimer(50*time.Millisecond)
@@ -624,12 +652,16 @@ func raftStates(nr *NodoRaft){
 			case <-nr.FollowerChannel:
 				nr.Rol = "follower"
 			case <-timer.C:
+				nr.Logger.Println("timer-leader", nr.CommitIndex, nr.LastApplied)
 				if(nr.CommitIndex>nr.LastApplied){
 					nr.LastApplied++
+					//nr.Logger.Println("timer-leader2", nr.CommitIndex, nr.LastApplied)
 					operacion := AplicaOperacion{nr.LastApplied, nr.Log[nr.LastApplied].Operacion}
+					//nr.Logger.Println("timer-leader3", nr.CommitIndex, nr.LastApplied)
 					nr.OperacionChannel <- operacion
 					operacion = <- nr.OperacionChannel
 					nr.Committed <- operacion.Operacion.Valor
+					
 
 				}
 				nr.Rol = "leader"
