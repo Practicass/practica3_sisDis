@@ -192,11 +192,7 @@ func (nr *NodoRaft) para() {
 }
 
 
-func (nr *NodoRaft) duerme() {
-	nr.Rol=""
-	go func() {time.Sleep(50 * time.Millisecond);nr.Rol="leader"; os.Exit(0) } ()
-	
-}
+
 
 // Devuelve "yo", mandato en curso y si este nodo cree ser lider
 //
@@ -271,10 +267,7 @@ func (nr * NodoRaft) ParaNodo(args Vacio, reply *Vacio) error {
 	defer nr.para()
 	return nil
 }
-func (nr * NodoRaft) DuermeNodo(args Vacio, reply *Vacio) error {
-	defer nr.duerme()
-	return nil
-}
+
 
 type EstadoParcial struct {
 	Mandato	int
@@ -393,6 +386,7 @@ type Results struct {
 func (nr *NodoRaft) AppendEntries(args *ArgAppendEntries,
 													  results *Results) error {
 	// Completar....
+	nr.Logger.Println("AppendEntries")
 	nr.Mux.Lock()
 	if(args.Term < nr.CurrentTerm){
 		results.Term = nr.CurrentTerm
