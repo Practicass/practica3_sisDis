@@ -1,1 +1,909 @@
-127.0.0.1_29003 -> 22:50:34.911074 raft.go:128: logger initialized
+127.0.0.1_29003 -> 22:17:14.881494 raft.go:168: logger initialized
+127.0.0.1_29003 -> 22:17:14.881730 raft.go:574: EMPIEZA -1 -1
+127.0.0.1_29003 -> 22:17:14.881776 raft.go:582: soyFollower
+127.0.0.1_29003 -> 22:17:14.988487 raft.go:594: soyCandidate -1 -1
+127.0.0.1_29003 -> 22:17:14.989492 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:14.989535 raft.go:538: sendAppendEntries 0 -1 0
+127.0.0.1_29003 -> 22:17:14.989551 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:14.989568 raft.go:538: sendAppendEntries 1 -1 0
+127.0.0.1_29003 -> 22:17:14.989579 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:14.989581 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:14.989617 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:14.989597 raft.go:538: sendAppendEntries 2 -1 0
+127.0.0.1_29003 -> 22:17:15.006855 raft.go:230: someter
+127.0.0.1_29003 -> 22:17:15.006910 raft.go:238: {0 1 {escribir x 3}} [{0 1 {escribir x 3}}]
+127.0.0.1_29003 -> 22:17:15.039960 raft.go:632: timer-leader -1 -1
+127.0.0.1_29003 -> 22:17:15.040018 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:15.040028 raft.go:538: sendAppendEntries 0 0 0
+127.0.0.1_29003 -> 22:17:15.040036 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:15.040045 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:15.040078 raft.go:538: sendAppendEntries 1 0 0
+127.0.0.1_29003 -> 22:17:15.040087 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:15.040093 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:15.040101 raft.go:538: sendAppendEntries 2 0 0
+127.0.0.1_29003 -> 22:17:15.040118 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:15.040134 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:15.090344 raft.go:632: timer-leader 0 -1
+127.0.0.1_29003 -> 22:17:15.090439 raft.go:637: timer-leader3 0 0
+127.0.0.1_29003 -> 22:17:15.090483 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:15.090502 raft.go:538: sendAppendEntries 0 0 1
+127.0.0.1_29003 -> 22:17:15.090515 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.090539 raft.go:538: sendAppendEntries 1 0 1
+127.0.0.1_29003 -> 22:17:15.090514 raft.go:248: fin-someter
+127.0.0.1_29003 -> 22:17:15.090561 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.090551 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.090716 raft.go:538: sendAppendEntries 2 0 0
+127.0.0.1_29003 -> 22:17:15.090756 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.141292 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:15.141358 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:15.141374 raft.go:538: sendAppendEntries 0 0 1
+127.0.0.1_29003 -> 22:17:15.141394 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.141411 raft.go:538: sendAppendEntries 1 0 1
+127.0.0.1_29003 -> 22:17:15.141417 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.141434 raft.go:538: sendAppendEntries 2 0 0
+127.0.0.1_29003 -> 22:17:15.141428 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.141452 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.192030 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:15.192088 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:15.192104 raft.go:538: sendAppendEntries 0 0 1
+127.0.0.1_29003 -> 22:17:15.192114 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.192139 raft.go:538: sendAppendEntries 1 0 1
+127.0.0.1_29003 -> 22:17:15.192150 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.192163 raft.go:538: sendAppendEntries 2 0 0
+127.0.0.1_29003 -> 22:17:15.192168 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.192190 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.242598 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:15.242661 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:15.242674 raft.go:538: sendAppendEntries 0 0 1
+127.0.0.1_29003 -> 22:17:15.242683 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.242697 raft.go:538: sendAppendEntries 1 0 1
+127.0.0.1_29003 -> 22:17:15.242730 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.242742 raft.go:538: sendAppendEntries 2 0 0
+127.0.0.1_29003 -> 22:17:15.242743 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.242767 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.293183 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:15.293238 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:15.293255 raft.go:538: sendAppendEntries 0 0 1
+127.0.0.1_29003 -> 22:17:15.293265 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.293286 raft.go:538: sendAppendEntries 1 0 1
+127.0.0.1_29003 -> 22:17:15.293297 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.293310 raft.go:538: sendAppendEntries 2 0 0
+127.0.0.1_29003 -> 22:17:15.293337 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.293374 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.343834 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:15.343907 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:15.343925 raft.go:538: sendAppendEntries 0 0 1
+127.0.0.1_29003 -> 22:17:15.343937 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.343957 raft.go:538: sendAppendEntries 1 0 1
+127.0.0.1_29003 -> 22:17:15.343968 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.343981 raft.go:538: sendAppendEntries 2 0 0
+127.0.0.1_29003 -> 22:17:15.344006 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.343985 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.394480 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:15.394541 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:15.394553 raft.go:538: sendAppendEntries 0 0 1
+127.0.0.1_29003 -> 22:17:15.394561 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.394571 raft.go:538: sendAppendEntries 1 0 1
+127.0.0.1_29003 -> 22:17:15.394578 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.394585 raft.go:538: sendAppendEntries 2 0 0
+127.0.0.1_29003 -> 22:17:15.394598 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.394596 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.445050 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:15.445103 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:15.445119 raft.go:538: sendAppendEntries 0 0 1
+127.0.0.1_29003 -> 22:17:15.445129 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.445143 raft.go:538: sendAppendEntries 1 0 1
+127.0.0.1_29003 -> 22:17:15.445153 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.445165 raft.go:538: sendAppendEntries 2 0 0
+127.0.0.1_29003 -> 22:17:15.445170 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.445182 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.495647 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:15.495710 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:15.495728 raft.go:538: sendAppendEntries 0 0 1
+127.0.0.1_29003 -> 22:17:15.495738 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.495748 raft.go:538: sendAppendEntries 1 0 1
+127.0.0.1_29003 -> 22:17:15.495754 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.495762 raft.go:538: sendAppendEntries 2 0 0
+127.0.0.1_29003 -> 22:17:15.495775 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.495768 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.546241 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:15.546315 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:15.546333 raft.go:538: sendAppendEntries 0 0 1
+127.0.0.1_29003 -> 22:17:15.546352 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.546371 raft.go:538: sendAppendEntries 1 0 1
+127.0.0.1_29003 -> 22:17:15.546382 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.546395 raft.go:538: sendAppendEntries 2 0 0
+127.0.0.1_29003 -> 22:17:15.546420 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.546439 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.596820 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:15.596886 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:15.596898 raft.go:538: sendAppendEntries 0 0 1
+127.0.0.1_29003 -> 22:17:15.596907 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.596920 raft.go:538: sendAppendEntries 1 0 1
+127.0.0.1_29003 -> 22:17:15.596926 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.596934 raft.go:538: sendAppendEntries 2 0 0
+127.0.0.1_29003 -> 22:17:15.596949 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.596950 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.647452 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:15.647527 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:15.647545 raft.go:538: sendAppendEntries 0 0 1
+127.0.0.1_29003 -> 22:17:15.647558 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.647580 raft.go:538: sendAppendEntries 1 0 1
+127.0.0.1_29003 -> 22:17:15.647591 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.647604 raft.go:538: sendAppendEntries 2 0 0
+127.0.0.1_29003 -> 22:17:15.647634 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.647688 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.698110 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:15.698166 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:15.698182 raft.go:538: sendAppendEntries 0 0 1
+127.0.0.1_29003 -> 22:17:15.698193 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.698213 raft.go:538: sendAppendEntries 1 0 1
+127.0.0.1_29003 -> 22:17:15.698225 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.698239 raft.go:538: sendAppendEntries 2 0 0
+127.0.0.1_29003 -> 22:17:15.698262 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.698280 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.748706 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:15.748776 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:15.748789 raft.go:538: sendAppendEntries 0 0 1
+127.0.0.1_29003 -> 22:17:15.748798 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.748812 raft.go:538: sendAppendEntries 1 0 1
+127.0.0.1_29003 -> 22:17:15.748819 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.748827 raft.go:538: sendAppendEntries 2 0 0
+127.0.0.1_29003 -> 22:17:15.748848 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.748868 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.799247 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:15.799314 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:15.799332 raft.go:538: sendAppendEntries 0 0 1
+127.0.0.1_29003 -> 22:17:15.799344 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.799363 raft.go:538: sendAppendEntries 1 0 1
+127.0.0.1_29003 -> 22:17:15.799380 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.799392 raft.go:538: sendAppendEntries 2 0 0
+127.0.0.1_29003 -> 22:17:15.799414 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.799453 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.849932 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:15.849993 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:15.850005 raft.go:538: sendAppendEntries 0 0 1
+127.0.0.1_29003 -> 22:17:15.850013 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.850027 raft.go:538: sendAppendEntries 1 0 1
+127.0.0.1_29003 -> 22:17:15.850034 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.850045 raft.go:538: sendAppendEntries 2 0 0
+127.0.0.1_29003 -> 22:17:15.850068 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.850058 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.900399 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:15.900457 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:15.900488 raft.go:538: sendAppendEntries 0 0 1
+127.0.0.1_29003 -> 22:17:15.900500 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.900520 raft.go:538: sendAppendEntries 1 0 1
+127.0.0.1_29003 -> 22:17:15.900531 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.900567 raft.go:538: sendAppendEntries 2 0 0
+127.0.0.1_29003 -> 22:17:15.900592 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.900600 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.950970 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:15.951028 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:15.951039 raft.go:538: sendAppendEntries 0 0 1
+127.0.0.1_29003 -> 22:17:15.951048 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.951060 raft.go:538: sendAppendEntries 1 0 1
+127.0.0.1_29003 -> 22:17:15.951067 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.951076 raft.go:538: sendAppendEntries 2 0 0
+127.0.0.1_29003 -> 22:17:15.951088 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:15.951136 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.001521 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:16.001583 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:16.001595 raft.go:538: sendAppendEntries 0 0 1
+127.0.0.1_29003 -> 22:17:16.001603 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.001617 raft.go:538: sendAppendEntries 1 0 1
+127.0.0.1_29003 -> 22:17:16.001624 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.001631 raft.go:538: sendAppendEntries 2 0 0
+127.0.0.1_29003 -> 22:17:16.001649 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.001658 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.052109 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:16.052179 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:16.052195 raft.go:538: sendAppendEntries 0 0 1
+127.0.0.1_29003 -> 22:17:16.052207 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.052226 raft.go:538: sendAppendEntries 1 0 1
+127.0.0.1_29003 -> 22:17:16.052237 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.052248 raft.go:538: sendAppendEntries 2 0 0
+127.0.0.1_29003 -> 22:17:16.052253 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.052274 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.102754 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:16.102819 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:16.102836 raft.go:538: sendAppendEntries 0 0 1
+127.0.0.1_29003 -> 22:17:16.102847 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.102870 raft.go:538: sendAppendEntries 1 0 1
+127.0.0.1_29003 -> 22:17:16.102880 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.102893 raft.go:538: sendAppendEntries 2 0 0
+127.0.0.1_29003 -> 22:17:16.102922 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.102935 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.153342 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:16.153401 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:16.153413 raft.go:538: sendAppendEntries 0 0 1
+127.0.0.1_29003 -> 22:17:16.153425 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.153436 raft.go:538: sendAppendEntries 1 0 1
+127.0.0.1_29003 -> 22:17:16.153443 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.153456 raft.go:538: sendAppendEntries 2 0 0
+127.0.0.1_29003 -> 22:17:16.153472 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.153516 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.203993 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:16.204049 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:16.204061 raft.go:538: sendAppendEntries 0 0 1
+127.0.0.1_29003 -> 22:17:16.204070 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.204083 raft.go:538: sendAppendEntries 1 0 1
+127.0.0.1_29003 -> 22:17:16.204093 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.204105 raft.go:538: sendAppendEntries 2 0 0
+127.0.0.1_29003 -> 22:17:16.204107 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.204127 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.254513 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:16.254583 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:16.254625 raft.go:538: sendAppendEntries 0 0 1
+127.0.0.1_29003 -> 22:17:16.254641 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.254665 raft.go:538: sendAppendEntries 1 0 1
+127.0.0.1_29003 -> 22:17:16.254676 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.254689 raft.go:538: sendAppendEntries 2 0 0
+127.0.0.1_29003 -> 22:17:16.254714 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.254728 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.305153 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:16.305208 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:16.305224 raft.go:538: sendAppendEntries 0 0 1
+127.0.0.1_29003 -> 22:17:16.305236 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.305255 raft.go:538: sendAppendEntries 1 0 1
+127.0.0.1_29003 -> 22:17:16.305266 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.305279 raft.go:538: sendAppendEntries 2 0 0
+127.0.0.1_29003 -> 22:17:16.305280 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.305302 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.355717 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:16.355795 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:16.355813 raft.go:538: sendAppendEntries 0 0 1
+127.0.0.1_29003 -> 22:17:16.355826 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.355847 raft.go:538: sendAppendEntries 1 0 1
+127.0.0.1_29003 -> 22:17:16.355857 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.355868 raft.go:538: sendAppendEntries 2 0 0
+127.0.0.1_29003 -> 22:17:16.355873 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.355901 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.406445 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:16.406509 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:16.406522 raft.go:538: sendAppendEntries 0 0 1
+127.0.0.1_29003 -> 22:17:16.406531 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.406549 raft.go:538: sendAppendEntries 1 0 1
+127.0.0.1_29003 -> 22:17:16.406560 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.406570 raft.go:538: sendAppendEntries 2 0 0
+127.0.0.1_29003 -> 22:17:16.406589 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.406608 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.456982 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:16.457071 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:16.457091 raft.go:538: sendAppendEntries 0 0 1
+127.0.0.1_29003 -> 22:17:16.457105 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.457122 raft.go:538: sendAppendEntries 1 0 1
+127.0.0.1_29003 -> 22:17:16.457133 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.457171 raft.go:538: sendAppendEntries 2 0 0
+127.0.0.1_29003 -> 22:17:16.457190 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.457368 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.507736 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:16.507814 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:16.507829 raft.go:538: sendAppendEntries 0 0 1
+127.0.0.1_29003 -> 22:17:16.507841 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.507857 raft.go:538: sendAppendEntries 1 0 1
+127.0.0.1_29003 -> 22:17:16.507867 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.507878 raft.go:538: sendAppendEntries 2 0 0
+127.0.0.1_29003 -> 22:17:16.507896 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.508065 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.558406 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:16.558481 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:16.558500 raft.go:538: sendAppendEntries 0 0 1
+127.0.0.1_29003 -> 22:17:16.558512 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.558539 raft.go:538: sendAppendEntries 1 0 1
+127.0.0.1_29003 -> 22:17:16.558551 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.558585 raft.go:538: sendAppendEntries 2 0 0
+127.0.0.1_29003 -> 22:17:16.558573 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.558616 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.608973 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:16.609030 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:16.609042 raft.go:538: sendAppendEntries 0 0 1
+127.0.0.1_29003 -> 22:17:16.609051 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.609064 raft.go:538: sendAppendEntries 1 0 1
+127.0.0.1_29003 -> 22:17:16.609071 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.609078 raft.go:538: sendAppendEntries 2 0 0
+127.0.0.1_29003 -> 22:17:16.609098 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.609086 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.659575 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:16.659651 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:16.659664 raft.go:538: sendAppendEntries 0 0 1
+127.0.0.1_29003 -> 22:17:16.659673 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.659696 raft.go:538: sendAppendEntries 1 0 1
+127.0.0.1_29003 -> 22:17:16.659703 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.659711 raft.go:538: sendAppendEntries 2 0 0
+127.0.0.1_29003 -> 22:17:16.659733 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.659733 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.710236 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:16.710319 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:16.710331 raft.go:538: sendAppendEntries 0 0 1
+127.0.0.1_29003 -> 22:17:16.710339 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.710353 raft.go:538: sendAppendEntries 1 0 1
+127.0.0.1_29003 -> 22:17:16.710360 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.710368 raft.go:538: sendAppendEntries 2 0 0
+127.0.0.1_29003 -> 22:17:16.710386 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.710399 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.760789 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:16.760843 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:16.760859 raft.go:538: sendAppendEntries 0 0 1
+127.0.0.1_29003 -> 22:17:16.760870 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.760884 raft.go:538: sendAppendEntries 1 0 1
+127.0.0.1_29003 -> 22:17:16.760894 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.760906 raft.go:538: sendAppendEntries 2 0 0
+127.0.0.1_29003 -> 22:17:16.760923 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.760966 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.811303 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:16.811360 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:16.811371 raft.go:538: sendAppendEntries 0 0 1
+127.0.0.1_29003 -> 22:17:16.811379 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.811390 raft.go:538: sendAppendEntries 1 0 1
+127.0.0.1_29003 -> 22:17:16.811397 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.811404 raft.go:538: sendAppendEntries 2 0 0
+127.0.0.1_29003 -> 22:17:16.811417 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.811422 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.861794 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:16.861853 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:16.861870 raft.go:538: sendAppendEntries 0 0 1
+127.0.0.1_29003 -> 22:17:16.861882 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.861899 raft.go:538: sendAppendEntries 1 0 1
+127.0.0.1_29003 -> 22:17:16.861918 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.861931 raft.go:538: sendAppendEntries 2 0 0
+127.0.0.1_29003 -> 22:17:16.861956 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.861965 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.912370 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:16.912427 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:16.912443 raft.go:538: sendAppendEntries 0 0 1
+127.0.0.1_29003 -> 22:17:16.912474 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.912493 raft.go:538: sendAppendEntries 1 0 1
+127.0.0.1_29003 -> 22:17:16.912503 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.912513 raft.go:538: sendAppendEntries 2 0 0
+127.0.0.1_29003 -> 22:17:16.912535 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.912528 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.963057 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:16.963113 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:16.963124 raft.go:538: sendAppendEntries 0 0 1
+127.0.0.1_29003 -> 22:17:16.963132 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.963144 raft.go:538: sendAppendEntries 1 0 1
+127.0.0.1_29003 -> 22:17:16.963150 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.963157 raft.go:538: sendAppendEntries 2 0 0
+127.0.0.1_29003 -> 22:17:16.963177 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:16.963168 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:17.013549 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:17.013616 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:17.013629 raft.go:538: sendAppendEntries 0 0 1
+127.0.0.1_29003 -> 22:17:17.013644 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:17.013657 raft.go:538: sendAppendEntries 1 0 1
+127.0.0.1_29003 -> 22:17:17.013664 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:17.013673 raft.go:538: sendAppendEntries 2 0 0
+127.0.0.1_29003 -> 22:17:17.013686 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:17.013735 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:17.064120 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:17.064185 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:17.064198 raft.go:538: sendAppendEntries 0 0 1
+127.0.0.1_29003 -> 22:17:17.064206 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:17.064222 raft.go:538: sendAppendEntries 1 0 1
+127.0.0.1_29003 -> 22:17:17.064233 raft.go:555: sendAppendEntries-envioHeartbeat
+127.0.0.1_29003 -> 22:17:17.064245 raft.go:538: sendAppendEntries 2 0 0
+127.0.0.1_29003 -> 22:17:17.064239 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:17.064270 raft.go:475: envioHeartbeat
+127.0.0.1_29003 -> 22:17:17.093799 raft.go:230: someter
+127.0.0.1_29003 -> 22:17:17.093855 raft.go:238: {1 1 {escribir y 1}} [{0 1 {escribir x 3}} {1 1 {escribir y 1}}]
+127.0.0.1_29003 -> 22:17:17.114868 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:17.114947 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:17.114965 raft.go:538: sendAppendEntries 0 1 1
+127.0.0.1_29003 -> 22:17:17.114977 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.114988 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:17.115004 raft.go:538: sendAppendEntries 1 1 1
+127.0.0.1_29003 -> 22:17:17.115014 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.115023 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:17.115034 raft.go:538: sendAppendEntries 2 1 0
+127.0.0.1_29003 -> 22:17:17.115056 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.115067 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.115266 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.115266 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.165469 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:17.165520 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:17.165531 raft.go:538: sendAppendEntries 0 1 1
+127.0.0.1_29003 -> 22:17:17.165538 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.165545 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:17.165557 raft.go:538: sendAppendEntries 1 1 1
+127.0.0.1_29003 -> 22:17:17.165567 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.165577 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:17.165586 raft.go:538: sendAppendEntries 2 1 0
+127.0.0.1_29003 -> 22:17:17.165617 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.165626 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.165798 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.165820 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.215997 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:17.216061 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:17.216073 raft.go:538: sendAppendEntries 0 1 1
+127.0.0.1_29003 -> 22:17:17.216081 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.216089 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:17.216101 raft.go:538: sendAppendEntries 1 1 1
+127.0.0.1_29003 -> 22:17:17.216111 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.216120 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:17.216131 raft.go:538: sendAppendEntries 2 1 0
+127.0.0.1_29003 -> 22:17:17.216120 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.216154 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.216334 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.216343 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.266520 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:17.266598 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:17.266610 raft.go:538: sendAppendEntries 0 1 1
+127.0.0.1_29003 -> 22:17:17.266619 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.266630 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:17.266647 raft.go:538: sendAppendEntries 1 1 1
+127.0.0.1_29003 -> 22:17:17.266658 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.266673 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:17.266681 raft.go:538: sendAppendEntries 2 1 0
+127.0.0.1_29003 -> 22:17:17.266703 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.266725 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.266920 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.266958 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.317089 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:17.317167 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:17.317180 raft.go:538: sendAppendEntries 0 1 1
+127.0.0.1_29003 -> 22:17:17.317188 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.317197 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:17.317215 raft.go:538: sendAppendEntries 1 1 1
+127.0.0.1_29003 -> 22:17:17.317225 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.317240 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:17.317259 raft.go:538: sendAppendEntries 2 1 0
+127.0.0.1_29003 -> 22:17:17.317254 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.317279 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.317577 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.317656 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.367805 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:17.367858 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:17.367876 raft.go:538: sendAppendEntries 0 1 1
+127.0.0.1_29003 -> 22:17:17.367905 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.367913 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:17.367925 raft.go:538: sendAppendEntries 1 1 1
+127.0.0.1_29003 -> 22:17:17.367931 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.367937 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:17.367944 raft.go:538: sendAppendEntries 2 1 0
+127.0.0.1_29003 -> 22:17:17.367962 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.367954 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.368142 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.368168 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.418328 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:17.418401 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:17.418416 raft.go:538: sendAppendEntries 0 1 1
+127.0.0.1_29003 -> 22:17:17.418442 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.418455 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:17.418465 raft.go:538: sendAppendEntries 1 1 1
+127.0.0.1_29003 -> 22:17:17.418471 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.418477 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:17.418484 raft.go:538: sendAppendEntries 2 1 0
+127.0.0.1_29003 -> 22:17:17.418499 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.418584 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.418693 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.419093 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.469301 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:17.469372 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:17.469392 raft.go:538: sendAppendEntries 0 1 1
+127.0.0.1_29003 -> 22:17:17.469406 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.469420 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:17.469442 raft.go:538: sendAppendEntries 1 1 1
+127.0.0.1_29003 -> 22:17:17.469454 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.469465 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:17.469477 raft.go:538: sendAppendEntries 2 1 0
+127.0.0.1_29003 -> 22:17:17.469471 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.469508 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.469781 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.469856 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.520115 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:17.520170 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:17.520181 raft.go:538: sendAppendEntries 0 1 1
+127.0.0.1_29003 -> 22:17:17.520189 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.520197 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:17.520210 raft.go:538: sendAppendEntries 1 1 1
+127.0.0.1_29003 -> 22:17:17.520217 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.520223 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:17.520231 raft.go:538: sendAppendEntries 2 1 0
+127.0.0.1_29003 -> 22:17:17.520252 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.520238 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.520443 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.520478 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.570631 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:17.570701 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:17.570716 raft.go:538: sendAppendEntries 0 1 1
+127.0.0.1_29003 -> 22:17:17.570724 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.570732 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:17.570745 raft.go:538: sendAppendEntries 1 1 1
+127.0.0.1_29003 -> 22:17:17.570755 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.570766 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:17.570773 raft.go:538: sendAppendEntries 2 1 0
+127.0.0.1_29003 -> 22:17:17.570790 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.570802 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.570976 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.571013 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.621170 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:17.621225 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:17.621240 raft.go:538: sendAppendEntries 0 1 1
+127.0.0.1_29003 -> 22:17:17.621257 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.621268 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:17.621286 raft.go:538: sendAppendEntries 1 1 1
+127.0.0.1_29003 -> 22:17:17.621296 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.621307 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:17.621320 raft.go:538: sendAppendEntries 2 1 0
+127.0.0.1_29003 -> 22:17:17.621298 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.621331 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.621598 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.621602 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.671787 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:17.671851 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:17.671864 raft.go:538: sendAppendEntries 0 1 1
+127.0.0.1_29003 -> 22:17:17.671872 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.671880 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:17.671897 raft.go:538: sendAppendEntries 1 1 1
+127.0.0.1_29003 -> 22:17:17.671943 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.671953 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:17.671960 raft.go:538: sendAppendEntries 2 1 0
+127.0.0.1_29003 -> 22:17:17.671975 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.671909 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.672184 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.672190 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.722375 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:17.722435 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:17.722446 raft.go:538: sendAppendEntries 0 1 1
+127.0.0.1_29003 -> 22:17:17.722460 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.722467 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:17.722479 raft.go:538: sendAppendEntries 1 1 1
+127.0.0.1_29003 -> 22:17:17.722487 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.722557 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:17.722576 raft.go:538: sendAppendEntries 2 1 0
+127.0.0.1_29003 -> 22:17:17.722492 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.722606 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.722841 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.722866 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.772994 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:17.773107 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:17.773125 raft.go:538: sendAppendEntries 0 1 1
+127.0.0.1_29003 -> 22:17:17.773138 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.773150 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:17.773169 raft.go:538: sendAppendEntries 1 1 1
+127.0.0.1_29003 -> 22:17:17.773180 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.773192 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:17.773205 raft.go:538: sendAppendEntries 2 1 0
+127.0.0.1_29003 -> 22:17:17.773238 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.773258 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.773463 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.773488 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.823690 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:17.823743 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:17.823755 raft.go:538: sendAppendEntries 0 1 1
+127.0.0.1_29003 -> 22:17:17.823763 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.823770 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:17.823780 raft.go:538: sendAppendEntries 1 1 1
+127.0.0.1_29003 -> 22:17:17.823786 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.823792 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:17.823799 raft.go:538: sendAppendEntries 2 1 0
+127.0.0.1_29003 -> 22:17:17.823831 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.823845 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.824047 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.824045 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.874731 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:17.874849 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:17.874869 raft.go:538: sendAppendEntries 0 1 1
+127.0.0.1_29003 -> 22:17:17.874914 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.874923 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:17.874949 raft.go:538: sendAppendEntries 1 1 1
+127.0.0.1_29003 -> 22:17:17.874960 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.874970 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:17.874976 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.874984 raft.go:538: sendAppendEntries 2 1 0
+127.0.0.1_29003 -> 22:17:17.875058 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.875235 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.875254 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.925496 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:17.925565 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:17.925578 raft.go:538: sendAppendEntries 0 1 1
+127.0.0.1_29003 -> 22:17:17.925586 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.925593 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:17.925605 raft.go:538: sendAppendEntries 1 1 1
+127.0.0.1_29003 -> 22:17:17.925616 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.925626 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:17.925619 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.925651 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.925644 raft.go:538: sendAppendEntries 2 1 0
+127.0.0.1_29003 -> 22:17:17.925862 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.925878 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.976051 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:17.976108 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:17.976118 raft.go:538: sendAppendEntries 0 1 1
+127.0.0.1_29003 -> 22:17:17.976129 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.976147 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:17.976166 raft.go:538: sendAppendEntries 1 1 1
+127.0.0.1_29003 -> 22:17:17.976173 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.976179 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:17.976186 raft.go:538: sendAppendEntries 2 1 0
+127.0.0.1_29003 -> 22:17:17.976204 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.976219 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.976383 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:17.976428 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.026657 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:18.026730 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:18.026742 raft.go:538: sendAppendEntries 0 1 1
+127.0.0.1_29003 -> 22:17:18.026751 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.026762 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:18.026773 raft.go:538: sendAppendEntries 1 1 1
+127.0.0.1_29003 -> 22:17:18.026779 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.026785 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:18.026793 raft.go:538: sendAppendEntries 2 1 0
+127.0.0.1_29003 -> 22:17:18.026805 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.026856 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.026982 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.027060 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.077238 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:18.077326 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:18.077338 raft.go:538: sendAppendEntries 0 1 1
+127.0.0.1_29003 -> 22:17:18.077346 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.077353 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:18.077365 raft.go:538: sendAppendEntries 1 1 1
+127.0.0.1_29003 -> 22:17:18.077372 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.077378 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:18.077400 raft.go:538: sendAppendEntries 2 1 0
+127.0.0.1_29003 -> 22:17:18.077419 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.077432 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.077744 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.077784 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.127976 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:18.128030 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:18.128041 raft.go:538: sendAppendEntries 0 1 1
+127.0.0.1_29003 -> 22:17:18.128048 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.128056 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:18.128067 raft.go:538: sendAppendEntries 1 1 1
+127.0.0.1_29003 -> 22:17:18.128074 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.128079 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:18.128086 raft.go:538: sendAppendEntries 2 1 0
+127.0.0.1_29003 -> 22:17:18.128092 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.128222 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.128332 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.128408 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.178600 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:18.178655 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:18.178670 raft.go:538: sendAppendEntries 0 1 1
+127.0.0.1_29003 -> 22:17:18.178681 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.178691 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:18.178708 raft.go:538: sendAppendEntries 1 1 1
+127.0.0.1_29003 -> 22:17:18.178719 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.178735 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.178729 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:18.178836 raft.go:538: sendAppendEntries 2 1 0
+127.0.0.1_29003 -> 22:17:18.178857 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.178952 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.178990 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.229154 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:18.229221 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:18.229232 raft.go:538: sendAppendEntries 0 1 1
+127.0.0.1_29003 -> 22:17:18.229239 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.229246 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:18.229257 raft.go:538: sendAppendEntries 1 1 1
+127.0.0.1_29003 -> 22:17:18.229265 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.229274 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:18.229283 raft.go:538: sendAppendEntries 2 1 0
+127.0.0.1_29003 -> 22:17:18.229301 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.229323 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.229490 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.229509 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.279716 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:18.279778 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:18.279794 raft.go:538: sendAppendEntries 0 1 1
+127.0.0.1_29003 -> 22:17:18.279806 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.279817 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:18.279838 raft.go:538: sendAppendEntries 1 1 1
+127.0.0.1_29003 -> 22:17:18.279851 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.279864 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:18.279877 raft.go:538: sendAppendEntries 2 1 0
+127.0.0.1_29003 -> 22:17:18.279865 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.279903 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.280129 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.280129 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.330332 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:18.330410 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:18.330452 raft.go:538: sendAppendEntries 0 1 1
+127.0.0.1_29003 -> 22:17:18.330465 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.330492 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:18.330507 raft.go:538: sendAppendEntries 1 1 1
+127.0.0.1_29003 -> 22:17:18.330518 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.330528 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:18.330540 raft.go:538: sendAppendEntries 2 1 0
+127.0.0.1_29003 -> 22:17:18.330577 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.330559 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.330874 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.330902 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.381084 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:18.381160 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:18.381177 raft.go:538: sendAppendEntries 0 1 1
+127.0.0.1_29003 -> 22:17:18.381189 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.381202 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:18.381223 raft.go:538: sendAppendEntries 1 1 1
+127.0.0.1_29003 -> 22:17:18.381234 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.381245 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:18.381257 raft.go:538: sendAppendEntries 2 1 0
+127.0.0.1_29003 -> 22:17:18.381282 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.381311 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.381485 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.381561 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.431721 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:18.431798 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:18.431816 raft.go:538: sendAppendEntries 0 1 1
+127.0.0.1_29003 -> 22:17:18.431830 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.431842 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:18.431861 raft.go:538: sendAppendEntries 1 1 1
+127.0.0.1_29003 -> 22:17:18.431873 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.431884 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:18.431896 raft.go:538: sendAppendEntries 2 1 0
+127.0.0.1_29003 -> 22:17:18.431931 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.431943 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.432149 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.432159 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.482355 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:18.482410 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:18.482425 raft.go:538: sendAppendEntries 0 1 1
+127.0.0.1_29003 -> 22:17:18.482436 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.482447 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:18.482465 raft.go:538: sendAppendEntries 1 1 1
+127.0.0.1_29003 -> 22:17:18.482476 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.482487 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:18.482524 raft.go:538: sendAppendEntries 2 1 0
+127.0.0.1_29003 -> 22:17:18.482489 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.482534 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.482754 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.482772 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.532980 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:18.533071 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:18.533090 raft.go:538: sendAppendEntries 0 1 1
+127.0.0.1_29003 -> 22:17:18.533104 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.533117 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:18.533134 raft.go:538: sendAppendEntries 1 1 1
+127.0.0.1_29003 -> 22:17:18.533145 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.533156 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:18.533240 raft.go:538: sendAppendEntries 2 1 0
+127.0.0.1_29003 -> 22:17:18.533265 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.533337 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.533642 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.533642 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.583829 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:18.583884 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:18.583895 raft.go:538: sendAppendEntries 0 1 1
+127.0.0.1_29003 -> 22:17:18.583902 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.583910 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:18.583921 raft.go:538: sendAppendEntries 1 1 1
+127.0.0.1_29003 -> 22:17:18.583928 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.583934 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:18.583941 raft.go:538: sendAppendEntries 2 1 0
+127.0.0.1_29003 -> 22:17:18.583939 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.583961 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.584173 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.584230 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.634374 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:18.634431 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:18.634443 raft.go:538: sendAppendEntries 0 1 1
+127.0.0.1_29003 -> 22:17:18.634451 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.634459 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:18.634470 raft.go:538: sendAppendEntries 1 1 1
+127.0.0.1_29003 -> 22:17:18.634476 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.634482 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:18.634489 raft.go:538: sendAppendEntries 2 1 0
+127.0.0.1_29003 -> 22:17:18.634507 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.634523 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.634707 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.634707 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.684936 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:18.685002 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:18.685019 raft.go:538: sendAppendEntries 0 1 1
+127.0.0.1_29003 -> 22:17:18.685027 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.685036 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:18.685051 raft.go:538: sendAppendEntries 1 1 1
+127.0.0.1_29003 -> 22:17:18.685059 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.685068 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:18.685079 raft.go:538: sendAppendEntries 2 1 0
+127.0.0.1_29003 -> 22:17:18.685072 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.685091 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.685279 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.685282 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.735485 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:18.735542 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:18.735553 raft.go:538: sendAppendEntries 0 1 1
+127.0.0.1_29003 -> 22:17:18.735561 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.735568 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:18.735580 raft.go:538: sendAppendEntries 1 1 1
+127.0.0.1_29003 -> 22:17:18.735586 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.735592 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:18.735600 raft.go:538: sendAppendEntries 2 1 0
+127.0.0.1_29003 -> 22:17:18.735618 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.735631 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.735842 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.735858 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.786042 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:18.786095 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:18.786121 raft.go:538: sendAppendEntries 0 1 1
+127.0.0.1_29003 -> 22:17:18.786130 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.786138 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:18.786149 raft.go:538: sendAppendEntries 1 1 1
+127.0.0.1_29003 -> 22:17:18.786156 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.786161 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:18.786179 raft.go:538: sendAppendEntries 2 1 0
+127.0.0.1_29003 -> 22:17:18.786165 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.786204 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.786382 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.786389 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.836567 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:18.836634 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:18.836645 raft.go:538: sendAppendEntries 0 1 1
+127.0.0.1_29003 -> 22:17:18.836652 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.836659 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:18.836671 raft.go:538: sendAppendEntries 1 1 1
+127.0.0.1_29003 -> 22:17:18.836681 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.836691 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:18.836700 raft.go:538: sendAppendEntries 2 1 0
+127.0.0.1_29003 -> 22:17:18.836715 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.836753 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.836905 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.836918 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.887182 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:18.887238 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:18.887249 raft.go:538: sendAppendEntries 0 1 1
+127.0.0.1_29003 -> 22:17:18.887256 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.887264 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:18.887276 raft.go:538: sendAppendEntries 1 1 1
+127.0.0.1_29003 -> 22:17:18.887286 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.887295 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:18.887306 raft.go:538: sendAppendEntries 2 1 0
+127.0.0.1_29003 -> 22:17:18.887301 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.887322 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.887531 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.887541 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.937708 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:18.937762 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:18.937781 raft.go:538: sendAppendEntries 0 1 1
+127.0.0.1_29003 -> 22:17:18.937812 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.937820 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:18.937833 raft.go:538: sendAppendEntries 1 1 1
+127.0.0.1_29003 -> 22:17:18.937841 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.937851 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:18.937862 raft.go:538: sendAppendEntries 2 1 0
+127.0.0.1_29003 -> 22:17:18.937883 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.937895 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.938072 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.938087 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.988330 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:18.988411 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:18.988427 raft.go:538: sendAppendEntries 0 1 1
+127.0.0.1_29003 -> 22:17:18.988439 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.988452 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:18.988475 raft.go:538: sendAppendEntries 1 1 1
+127.0.0.1_29003 -> 22:17:18.988487 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.988506 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:18.988539 raft.go:538: sendAppendEntries 2 1 0
+127.0.0.1_29003 -> 22:17:18.988572 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.988564 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.988813 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:18.988822 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:19.038986 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:19.039094 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:19.039120 raft.go:538: sendAppendEntries 0 1 1
+127.0.0.1_29003 -> 22:17:19.039132 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:19.039143 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:19.039172 raft.go:538: sendAppendEntries 1 1 1
+127.0.0.1_29003 -> 22:17:19.039181 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:19.039190 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:19.039200 raft.go:538: sendAppendEntries 2 1 0
+127.0.0.1_29003 -> 22:17:19.039238 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:19.039223 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:19.039495 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:19.039498 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:19.089708 raft.go:632: timer-leader 0 0
+127.0.0.1_29003 -> 22:17:19.089804 raft.go:624: soyLeader
+127.0.0.1_29003 -> 22:17:19.089821 raft.go:538: sendAppendEntries 0 1 1
+127.0.0.1_29003 -> 22:17:19.089833 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:19.089846 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:19.089867 raft.go:538: sendAppendEntries 1 1 1
+127.0.0.1_29003 -> 22:17:19.089877 raft.go:541: sendAppendEntries-nuevaEntrada
+127.0.0.1_29003 -> 22:17:19.089899 raft.go:544: sendAppendEntries-nuevaEntrada2
+127.0.0.1_29003 -> 22:17:19.089913 raft.go:538: sendAppendEntries 2 1 0
+127.0.0.1_29003 -> 22:17:19.089902 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:19.089940 raft.go:494: nuevaEntrada
+127.0.0.1_29003 -> 22:17:19.090167 raft.go:497: error-nuevaEntrada
+127.0.0.1_29003 -> 22:17:19.090224 raft.go:497: error-nuevaEntrada
