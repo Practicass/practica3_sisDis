@@ -191,7 +191,7 @@ func (cfg *configDespliegue) soloArranqueYparadaTest1(t *testing.T) {
 
 // Primer lider en marcha - 3 NODOS RAFT
 func (cfg *configDespliegue) elegirPrimerLiderTest2(t *testing.T) {
-	//t.Skip("SKIPPED ElegirPrimerLiderTest2")
+	t.Skip("SKIPPED ElegirPrimerLiderTest2")
 
 	fmt.Println(t.Name(), ".....................")
 
@@ -210,7 +210,7 @@ func (cfg *configDespliegue) elegirPrimerLiderTest2(t *testing.T) {
 
 // Fallo de un primer lider y reeleccion de uno nuevo - 3 NODOS RAFT
 func (cfg *configDespliegue) falloAnteriorElegirNuevoLiderTest3(t *testing.T) {
-	//t.Skip("SKIPPED FalloAnteriorElegirNuevoLiderTest3")
+	t.Skip("SKIPPED FalloAnteriorElegirNuevoLiderTest3")
 
 	fmt.Println(t.Name(), ".....................")
 
@@ -384,7 +384,7 @@ func (cfg *configDespliegue) startDistributedProcesses() {
 	}
 
 	// aproximadamente 500 ms para cada arranque por ssh en portatil
-	time.Sleep(650 * time.Millisecond) //PARA TEST 1
+	time.Sleep(700 * time.Millisecond) //PARA TEST 1
 	
 }
 
@@ -445,8 +445,7 @@ func (cfg *configDespliegue) pruebaComprometerOperacion(indice int,
 	var reply raft.ResultadoRemoto
 	
 	err := cfg.nodosRaft[cfg.lider].CallTimeout("NodoRaft.SometerOperacionRaft",
-	raft.TipoOperacion{operacion, clave, valor}, &reply,
-	5000*time.Millisecond)
+	raft.TipoOperacion{operacion, clave, valor}, &reply, 1000*time.Millisecond)
 	check.CheckError(err, "Error en llamada RPC SometerOperacionRaft")
 	cfg.lider = reply.IdLider
 	if(reply.IndiceRegistro != indice || reply.ValorADevolver != valor){

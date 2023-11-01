@@ -232,6 +232,7 @@ func (nr *NodoRaft) obtenerEstado() (int, int, bool, int) {
 // Cuarto valor es el lider, es el indice del líder si no es él
 func (nr *NodoRaft) someterOperacion(operacion TipoOperacion) (int, int,
 															bool, int, string) {
+	nr.Mux.Lock()
 	indice := -1
 	mandato := -1
 	EsLider := false
@@ -245,7 +246,9 @@ func (nr *NodoRaft) someterOperacion(operacion TipoOperacion) (int, int,
 		mandato = nr.CurrentTerm
 		entry := Entry{indice, mandato, operacion}
 		nr.Log = append(nr.Log, entry)
+		nr.Logger.Println(entry, nr.Log)
 		idLider = nr.Yo
+		nr.Logger.Println("fin-someter")
 		nr.Mux.Unlock()
 		valorADevolver = <-nr.Committed
 	} else {
@@ -253,7 +256,9 @@ func (nr *NodoRaft) someterOperacion(operacion TipoOperacion) (int, int,
 		idLider = nr.IdLider
 	
 	}
+	
 	return indice, mandato, EsLider, idLider, valorADevolver
+	
 }
 
 
