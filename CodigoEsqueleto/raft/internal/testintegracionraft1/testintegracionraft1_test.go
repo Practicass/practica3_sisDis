@@ -522,7 +522,6 @@ func (cfg *configDespliegue) pruebaComprometerOperacionSinMayoria(operacion stri
 
 	err := cfg.nodosRaft[cfg.lider].CallTimeout("NodoRaft.SometerOperacionRaft",
 		raft.TipoOperacion{operacion, clave, valor}, &reply, 2000*time.Millisecond)
-	check.CheckError(err, "Error en llamada RPC SometerOperacionRaft")
 	
 	if err == nil {
 		cfg.t.Fatalf("Se ha conseguido acuerdo sin mayoria %s",

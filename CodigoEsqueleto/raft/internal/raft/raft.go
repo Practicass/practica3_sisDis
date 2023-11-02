@@ -494,7 +494,7 @@ func (nr *NodoRaft) nuevaEntrada(nodo int, args *ArgAppendEntries,
 		nr.Logger.Println("nuevaEntrada")
 	error := nr.Nodos[nodo].CallTimeout("NodoRaft.AppendEntries", args, result, 10*time.Millisecond)
 	if error != nil {
-		nr.Logger.Println("error-nuevaEntrada")
+		nr.Logger.Println("error-nuevaEntrada", error)
 		return false
 	} else {
 		if result.Success {
@@ -538,15 +538,17 @@ func sendAppendEntries(nr *NodoRaft) {
 		nr.Logger.Println("sendAppendEntries", i,len(nr.Log)-1, nr.NextIndex[i])
 		if i != nr.Yo {
 			if len(nr.Log)-1 >= nr.NextIndex[i] {
-				nr.Logger.Println("sendAppendEntries-nuevaEntrada")
+				
 				entries := make([]Entry, 1)
 				entries[0] = Entry{nr.NextIndex[i], nr.Log[nr.NextIndex[i]].Mandato, nr.Log[nr.NextIndex[i]].Operacion}
-				nr.Logger.Println("sendAppendEntries-nuevaEntrada2")
+				
 				if nr.NextIndex[i] != 0 {
+					nr.Logger.Println("sendAppendEntries-nuevaEntrada")
 					prevLogIndex := nr.NextIndex[i] - 1
 					prevLogTerm := nr.Log[prevLogIndex].Mandato
 					go nr.nuevaEntrada(i, &ArgAppendEntries{nr.CurrentTerm, nr.Yo, prevLogIndex, prevLogTerm, entries, nr.CommitIndex}, &result)
 				} else {
+					nr.Logger.Println("sendAppendEntries-nuevaEntrada2")
 					go nr.nuevaEntrada(i, &ArgAppendEntries{nr.CurrentTerm, nr.Yo, -1, 0, entries, nr.CommitIndex}, &result)
 
 				}
