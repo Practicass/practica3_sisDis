@@ -142,7 +142,7 @@ func NuevoNodo(nodos []rpctimeout.HostPort, yo int,
 	nr.LastApplied = -1
 	nr.NextIndex = make([]int, 3)
 	nr.MatchIndex = make([]int, 3)
-
+	
 	if kEnableDebugLogs {
 		nombreNodo := nodos[yo].Host() + "_" + nodos[yo].Port()
 		logPrefix := fmt.Sprintf("%s", nombreNodo)
@@ -632,15 +632,6 @@ func raftStates(nr *NodoRaft) {
 			case <-nr.FollowerChannel:
 				nr.Rol = "follower"
 			case <-timer.C:
-				
-				if nr.CommitIndex > nr.LastApplied {
-					nr.LastApplied++
-					operacion := AplicaOperacion{nr.LastApplied, nr.Log[nr.LastApplied].Operacion}
-					nr.OperacionChannel <- operacion
-					operacion = <-nr.OperacionChannel
-					nr.Committed <- operacion.Operacion.Valor
-
-				}
 				nr.Rol = "leader"
 			}
 		}

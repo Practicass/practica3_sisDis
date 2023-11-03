@@ -2,7 +2,7 @@ package main
 
 import (
 	//"errors"
-	"fmt"
+	//"fmt"
 	//"log"
 	"net"
 	"net/rpc"
@@ -28,14 +28,14 @@ func main() {
 		nodos = append(nodos, rpctimeout.HostPort(endPoint))
 	}
 
-	canalAplicarOperacion := make(chan raft.AplicaOperacion, 1000)
+	//canalAplicarOperacion := make(chan raft.AplicaOperacion, 1000)
 
 	// Parte Servidor
 	nr := raft.NuevoNodo(nodos, me, make(chan raft.AplicaOperacion, 1000))
 	rpc.Register(nr)
 
-	almacen := make(map[string]string)
-	go realizarOperacion(almacen, canalAplicarOperacion)
+	//almacen := make(map[string]string)
+	//go realizarOperacion(almacen, canalAplicarOperacion)
 
 	l, err := net.Listen("tcp", os.Args[2:][me])
 	check.CheckError(err, "Main listen error:")
@@ -47,16 +47,4 @@ func main() {
 
 }
 
-func realizarOperacion(almacen map[string]string, canal chan raft.AplicaOperacion) {
-	for {
-		operacion := <-canal
-		fmt.Println(operacion)
-		if operacion.Operacion.Operacion == "leer" {
-			operacion.Operacion.Valor = almacen[operacion.Operacion.Clave]
-		} else if operacion.Operacion.Operacion == "escribir" {
-			almacen[operacion.Operacion.Clave] = operacion.Operacion.Valor
-			operacion.Operacion.Valor = "ok"
-		}
-		canal <- operacion
-	}
-}
+
