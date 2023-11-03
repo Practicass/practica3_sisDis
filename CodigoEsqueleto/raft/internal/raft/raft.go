@@ -203,6 +203,18 @@ func (nr *NodoRaft) obtenerEstado() (int, int, bool, int) {
 	return yo, mandato, esLider, idLider
 }
 
+
+func (nr *NodoRaft) obtenerLog() (int, int) {
+	
+	if(len(nr.Log)!=0){
+		return nr.CommitIndex, nr.Log[nr.CommitIndex].Mandato
+	}else{
+		return -1, 0
+	}
+}
+
+
+
 // El servicio que utilice Raft (base de datos clave/valor, por ejemplo)
 // Quiere buscar un acuerdo de posicion en registro para siguiente operacion
 // solicitada por cliente.
@@ -271,9 +283,17 @@ type EstadoRemoto struct {
 	IdNodo int
 	EstadoParcial
 }
+type EstadoLog struct {
+	Indice int
+	Mandato int
+}
 
 func (nr *NodoRaft) ObtenerEstadoNodo(args Vacio, reply *EstadoRemoto) error {
 	reply.IdNodo, reply.Mandato, reply.EsLider, reply.IdLider = nr.obtenerEstado()
+	return nil
+}
+func (nr *NodoRaft) ObtenerEstadoLog(args Vacio, reply *EstadoLog) error {
+	reply.Indice, reply.Mandato = nr.obtenerLog()
 	return nil
 }
 
