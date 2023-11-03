@@ -592,13 +592,16 @@ func sendAppendEntries(nr *NodoRaft) {
 }
 
 func raftStates(nr *NodoRaft) {
+	nr.Logger.Println("EMPIEZA", nr.CommitIndex, nr.LastApplied)
+	time.Sleep(700*time.Millisecond)
 	for {
-		nr.Logger.Println("EMPIEZA", nr.CommitIndex, nr.LastApplied)
+		
 		if nr.CommitIndex > nr.LastApplied {
 			nr.LastApplied++
 			operacion := AplicaOperacion{nr.LastApplied, nr.Log[nr.LastApplied].Operacion}
 			nr.OperacionChannel <- operacion
 		}
+		
 
 		for nr.Rol == "follower" {
 			nr.Logger.Println("soyFollower")

@@ -306,7 +306,7 @@ func (cfg *configDespliegue) pruebaUnLider(numreplicas int) int {
 		mapaLideres := make(map[int][]int)
 		for i := 0; i < numreplicas; i++ {
 			if cfg.conectados[i] {
-
+				
 				if _, mandato, eslider, _ := cfg.obtenerEstadoRemoto(i); eslider {
 					mapaLideres[mandato] = append(mapaLideres[mandato], i)
 				}
@@ -365,7 +365,7 @@ func (cfg *configDespliegue) startDistributedProcesses() {
 	}
 
 	// aproximadamente 500 ms para cada arranque por ssh en portatil
-	time.Sleep(600 * time.Millisecond) //PARA TEST 1
+	time.Sleep(1 * time.Second) //PARA TEST 1
 
 }
 
