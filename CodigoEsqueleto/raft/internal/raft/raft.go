@@ -203,17 +203,14 @@ func (nr *NodoRaft) obtenerEstado() (int, int, bool, int) {
 	return yo, mandato, esLider, idLider
 }
 
-
 func (nr *NodoRaft) obtenerLog() (int, int) {
-	
-	if(len(nr.Log)!=0){
+
+	if len(nr.Log) != 0 {
 		return nr.CommitIndex, nr.Log[nr.CommitIndex].Mandato
-	}else{
+	} else {
 		return -1, 0
 	}
 }
-
-
 
 // El servicio que utilice Raft (base de datos clave/valor, por ejemplo)
 // Quiere buscar un acuerdo de posicion en registro para siguiente operacion
@@ -239,25 +236,7 @@ func (nr *NodoRaft) someterOperacion(operacion TipoOperacion) (int, int,
 	EsLider := false
 	idLider := -1
 	valorADevolver := ""
-	nr.Logger.Println("someter")
 
-	// Vuestro codigo aqui
-	if EsLider = nr.Yo == nr.IdLider; EsLider {
-		indice = len(nr.Log)
-		mandato = nr.CurrentTerm
-		entry := Entry{indice, mandato, operacion}
-		nr.Log = append(nr.Log, entry)
-		nr.Logger.Println(entry, nr.Log)
-		idLider = nr.Yo
-		
-		nr.Mux.Unlock()
-		valorADevolver = <-nr.Committed
-	} else {
-		nr.Mux.Unlock()
-		idLider = nr.IdLider
-
-	}
-	nr.Logger.Println("fin-someter")
 	return indice, mandato, EsLider, idLider, valorADevolver
 
 }
@@ -284,7 +263,7 @@ type EstadoRemoto struct {
 	EstadoParcial
 }
 type EstadoLog struct {
-	Indice int
+	Indice  int
 	Mandato int
 }
 
@@ -390,7 +369,7 @@ type Results struct {
 func (nr *NodoRaft) AppendEntries(args *ArgAppendEntries,
 	results *Results) error {
 	// Completar....
-	nr.Logger.Println("AppendEntries")
+
 	nr.Mux.Lock()
 	if args.Term < nr.CurrentTerm {
 		results.Term = nr.CurrentTerm
@@ -511,7 +490,7 @@ func (nr *NodoRaft) enviarHeartbeat(nodo int, args *ArgAppendEntries,
 
 func (nr *NodoRaft) nuevaEntrada(nodo int, args *ArgAppendEntries,
 	result *Results) bool {
-		nr.Logger.Println("nuevaEntrada")
+	nr.Logger.Println("nuevaEntrada")
 	error := nr.Nodos[nodo].CallTimeout("NodoRaft.AppendEntries", args, result, 10*time.Millisecond)
 	if error != nil {
 		nr.Logger.Println("error-nuevaEntrada", error)
@@ -552,29 +531,29 @@ func requestVotes(nr *NodoRaft) {
 }
 
 func sendAppendEntries(nr *NodoRaft) {
-	
+
 	var result Results
 	for i := 0; i < len(nr.Nodos); i++ {
-		nr.Logger.Println("sendAppendEntries", i,len(nr.Log)-1, nr.NextIndex[i])
+		
 		if i != nr.Yo {
 			if len(nr.Log)-1 >= nr.NextIndex[i] {
-				
+
 				entries := make([]Entry, 1)
 				entries[0] = Entry{nr.NextIndex[i], nr.Log[nr.NextIndex[i]].Mandato, nr.Log[nr.NextIndex[i]].Operacion}
-				
+
 				if nr.NextIndex[i] != 0 {
-					nr.Logger.Println("sendAppendEntries-nuevaEntrada")
+					
 					prevLogIndex := nr.NextIndex[i] - 1
 					prevLogTerm := nr.Log[prevLogIndex].Mandato
 					go nr.nuevaEntrada(i, &ArgAppendEntries{nr.CurrentTerm, nr.Yo, prevLogIndex, prevLogTerm, entries, nr.CommitIndex}, &result)
 				} else {
-					nr.Logger.Println("sendAppendEntries-nuevaEntrada2")
+					
 					go nr.nuevaEntrada(i, &ArgAppendEntries{nr.CurrentTerm, nr.Yo, -1, 0, entries, nr.CommitIndex}, &result)
 
 				}
 			} else {
 				var entries []Entry
-				nr.Logger.Println("sendAppendEntries-envioHeartbeat")
+				
 				if nr.NextIndex[i] != 0 {
 					prevLogIndex := nr.NextIndex[i] - 1
 					prevLogTerm := nr.Log[prevLogIndex].Mandato
@@ -585,23 +564,22 @@ func sendAppendEntries(nr *NodoRaft) {
 
 				}
 			}
-			
+
 		}
 
 	}
 }
 
 func raftStates(nr *NodoRaft) {
-	nr.Logger.Println("EMPIEZA", nr.CommitIndex, nr.LastApplied)
-	time.Sleep(700*time.Millisecond)
+	nr.Logger.Println("EMPIEZA")
+	time.Sleep(650 * time.Millisecond)
 	for {
-		
+
 		if nr.CommitIndex > nr.LastApplied {
 			nr.LastApplied++
 			operacion := AplicaOperacion{nr.LastApplied, nr.Log[nr.LastApplied].Operacion}
 			nr.OperacionChannel <- operacion
 		}
-		
 
 		for nr.Rol == "follower" {
 			nr.Logger.Println("soyFollower")
@@ -616,7 +594,7 @@ func raftStates(nr *NodoRaft) {
 		}
 
 		for nr.Rol == "candidate" {
-			nr.Logger.Println("soyCandidate", nr.CommitIndex, nr.LastApplied)
+			nr.Logger.Println("soyCandidate")
 			if nr.CommitIndex > nr.LastApplied {
 				nr.LastApplied++
 				operacion := AplicaOperacion{nr.LastApplied, nr.Log[nr.LastApplied].Operacion}
@@ -654,12 +632,10 @@ func raftStates(nr *NodoRaft) {
 			case <-nr.FollowerChannel:
 				nr.Rol = "follower"
 			case <-timer.C:
-				nr.Logger.Println("timer-leader", nr.CommitIndex, nr.LastApplied)
+				
 				if nr.CommitIndex > nr.LastApplied {
 					nr.LastApplied++
-					//nr.Logger.Println("timer-leader2", nr.CommitIndex, nr.LastApplied)
 					operacion := AplicaOperacion{nr.LastApplied, nr.Log[nr.LastApplied].Operacion}
-					nr.Logger.Println("timer-leader3", nr.CommitIndex, nr.LastApplied)
 					nr.OperacionChannel <- operacion
 					operacion = <-nr.OperacionChannel
 					nr.Committed <- operacion.Operacion.Valor

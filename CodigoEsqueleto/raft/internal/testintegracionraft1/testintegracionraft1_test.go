@@ -217,6 +217,7 @@ func (cfg *configDespliegue) falloAnteriorElegirNuevoLiderTest3(t *testing.T) {
 
 	// Desconectar lider
 	// ???
+	fmt.Printf("Parar lider\n")
 	cfg.pararLider()
 
 	fmt.Printf("Comprobar nuevo lider\n")
@@ -405,8 +406,6 @@ func (cfg *configDespliegue) pararLider() {
 				&reply, 10*time.Millisecond)
 			check.CheckError(err, "Error en llamada RPC ParaNodo")
 			cfg.conectados[i] = false
-
-			fmt.Println(cfg.conectados)
 		}
 	}
 }
