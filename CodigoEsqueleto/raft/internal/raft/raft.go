@@ -86,9 +86,7 @@ type NodoRaft struct {
 	HearbeatChannel  chan bool
 	MyVotes          int
 	LeaderChannel    chan bool
-	Replies          int
 	OperacionChannel chan AplicaOperacion
-	Committed        chan string
 
 	// mirar figura 2 para descripción del estado que debe mantenre un nodo Raft
 	CurrentTerm int
@@ -131,9 +129,7 @@ func NuevoNodo(nodos []rpctimeout.HostPort, yo int,
 	nr.HearbeatChannel = make(chan bool)
 	nr.MyVotes = 0
 	nr.LeaderChannel = make(chan bool)
-	nr.Replies = 0
 	nr.OperacionChannel = canalAplicarOperacion
-	nr.Committed = make(chan string)
 
 	// mirar figura 2 para descripción del estado que debe mantenre un nodo Raft
 	nr.CurrentTerm = 0
@@ -142,7 +138,7 @@ func NuevoNodo(nodos []rpctimeout.HostPort, yo int,
 	nr.LastApplied = -1
 	nr.NextIndex = make([]int, 3)
 	nr.MatchIndex = make([]int, 3)
-	
+
 	if kEnableDebugLogs {
 		nombreNodo := nodos[yo].Host() + "_" + nodos[yo].Port()
 		logPrefix := fmt.Sprintf("%s", nombreNodo)
@@ -197,19 +193,10 @@ func (nr *NodoRaft) obtenerEstado() (int, int, bool, int) {
 	var esLider bool
 	var idLider int = nr.IdLider
 
-	esLider = nr.Yo == nr.IdLider
 	// Vuestro codigo aqui
-
+	esLider = nr.Yo == nr.IdLider
+	
 	return yo, mandato, esLider, idLider
-}
-
-func (nr *NodoRaft) obtenerLog() (int, int) {
-
-	if len(nr.Log) != 0 {
-		return nr.CommitIndex, nr.Log[nr.CommitIndex].Mandato
-	} else {
-		return -1, 0
-	}
 }
 
 // El servicio que utilice Raft (base de datos clave/valor, por ejemplo)
@@ -271,10 +258,6 @@ func (nr *NodoRaft) ObtenerEstadoNodo(args Vacio, reply *EstadoRemoto) error {
 	reply.IdNodo, reply.Mandato, reply.EsLider, reply.IdLider = nr.obtenerEstado()
 	return nil
 }
-func (nr *NodoRaft) ObtenerEstadoLog(args Vacio, reply *EstadoLog) error {
-	reply.Indice, reply.Mandato = nr.obtenerLog()
-	return nil
-}
 
 type ResultadoRemoto struct {
 	ValorADevolver string
@@ -316,38 +299,7 @@ type RespuestaPeticionVoto struct {
 	VoteGranted bool
 }
 
-// Metodo para RPC PedirVoto
-func (nr *NodoRaft) PedirVoto(peticion *ArgsPeticionVoto,
-	reply *RespuestaPeticionVoto) error {
-	// Vuestro codigo aqui
-	nr.Mux.Lock()
-	if peticion.Term < nr.CurrentTerm {
-		reply.Term = nr.CurrentTerm
-		reply.VoteGranted = false
-	} else if peticion.Term == nr.CurrentTerm &&
-		peticion.CandidateId != nr.VotedFor {
-		reply.Term = nr.CurrentTerm
-		reply.VoteGranted = false
-	} else if peticion.Term > nr.CurrentTerm {
-		if len(nr.Log) == 0 || peticion.LastLogTerm > nr.Log[len(nr.Log)-1].Mandato ||
-			(peticion.LastLogTerm == nr.Log[len(nr.Log)-1].Mandato && peticion.LastLogIndex >= len(nr.Log)-1) {
-			nr.CurrentTerm = peticion.Term
-			nr.VotedFor = peticion.CandidateId
-			reply.Term = nr.CurrentTerm
-			reply.VoteGranted = true
-		} else {
-			nr.CurrentTerm = peticion.Term
-			nr.VotedFor = nr.CurrentTerm
-			reply.VoteGranted = false
-		}
 
-		if nr.Rol == "candidate" || nr.Rol == "leader" {
-			nr.FollowerChannel <- true
-		}
-	}
-	nr.Mux.Unlock()
-	return nil
-}
 
 type ArgAppendEntries struct {
 	// Vuestros datos aqui
@@ -363,55 +315,6 @@ type Results struct {
 	// Vuestros datos aqui
 	Term    int
 	Success bool
-}
-
-// Metodo de tratamiento de llamadas RPC AppendEntries
-func (nr *NodoRaft) AppendEntries(args *ArgAppendEntries,
-	results *Results) error {
-	// Completar....
-
-	nr.Mux.Lock()
-	if args.Term < nr.CurrentTerm {
-		results.Term = nr.CurrentTerm
-	} else if args.Term == nr.CurrentTerm {
-		nr.IdLider = args.LeaderId
-		results.Term = nr.CurrentTerm
-		if len(nr.Log) == 0 {
-			if len(args.Entries) != 0 {
-				nr.Log = append(nr.Log, args.Entries...)
-
-			}
-			results.Success = true
-		} else if args.PrevLogIndex > len(nr.Log)-1 || nr.Log[args.PrevLogIndex].Mandato != args.PrevLogTerm {
-			results.Success = false
-		} else {
-			if len(args.Entries) != 0 {
-				nr.Log = nr.Log[0 : args.PrevLogIndex+1]
-				nr.Log = append(nr.Log, args.Entries...)
-
-			}
-			results.Success = true
-		}
-		if args.LeaderCommit > nr.CommitIndex {
-			nr.CommitIndex = min(args.LeaderCommit, len(nr.Log)-1)
-		}
-		nr.HearbeatChannel <- true
-	} else {
-		nr.IdLider = args.LeaderId
-		nr.CurrentTerm = args.Term
-		results.Term = nr.CurrentTerm
-		if nr.Rol == "leader" {
-			nr.FollowerChannel <- true
-		} else {
-			if args.LeaderCommit > nr.CommitIndex {
-				nr.CommitIndex = min(args.LeaderCommit, len(nr.Log)-1)
-			}
-			nr.HearbeatChannel <- true
-		}
-	}
-	nr.Mux.Unlock()
-
-	return nil
 }
 
 // ----- Metodos/Funciones a utilizar como clientes
@@ -449,10 +352,12 @@ func (nr *NodoRaft) enviarPeticionVoto(nodo int, args *ArgsPeticionVoto,
 
 	// Completar....
 
-	error := nr.Nodos[nodo].CallTimeout("NodoRaft.PedirVoto", args, reply, 10*time.Millisecond)
+	error := nr.Nodos[nodo].
+	CallTimeout("NodoRaft.PedirVoto", args, reply, 10*time.Millisecond)
 	if error != nil {
 		return false
 	} else {
+		nr.Mux.Lock()
 		if reply.Term > nr.CurrentTerm {
 			nr.CurrentTerm = reply.Term
 			nr.FollowerChannel <- true
@@ -462,9 +367,55 @@ func (nr *NodoRaft) enviarPeticionVoto(nodo int, args *ArgsPeticionVoto,
 				nr.LeaderChannel <- true
 			}
 		}
+		nr.Mux.Unlock()
 		return true
 	}
 
+}
+
+// Metodo para RPC PedirVoto
+func (nr *NodoRaft) PedirVoto(peticion *ArgsPeticionVoto,
+	reply *RespuestaPeticionVoto) error {
+	// Vuestro codigo aqui
+	nr.Mux.Lock()
+	if peticion.Term < nr.CurrentTerm {
+		reply.Term = nr.CurrentTerm
+		reply.VoteGranted = false
+	} else if peticion.Term == nr.CurrentTerm &&
+		peticion.CandidateId != nr.VotedFor {
+		reply.Term = nr.CurrentTerm
+		reply.VoteGranted = false
+	} else if peticion.Term > nr.CurrentTerm {
+		nr.CurrentTerm = peticion.Term
+		nr.VotedFor = peticion.CandidateId
+		reply.Term = nr.CurrentTerm
+		reply.VoteGranted = true
+		
+		if nr.Rol == "candidate" || nr.Rol == "leader" {
+			nr.FollowerChannel <- true
+		}
+	}
+	nr.Mux.Unlock()
+	return nil
+}
+
+func startRequestVotes(nr *NodoRaft) {
+	var reply RespuestaPeticionVoto
+	for i := 0; i < len(nr.Nodos); i++ {
+		if i != nr.Yo {
+			if len(nr.Log) != 0 {
+				lastLogIndex := len(nr.Log) - 1
+				lastLogTerm := nr.Log[lastLogIndex].Mandato
+				go nr.enviarPeticionVoto(i,
+					&ArgsPeticionVoto{nr.CurrentTerm, nr.Yo, 
+						lastLogIndex, lastLogTerm}, &reply)
+			} else {
+				go nr.enviarPeticionVoto(i, 
+					&ArgsPeticionVoto{nr.CurrentTerm, nr.Yo, 
+						-1, 0}, &reply)
+			}
+		}
+	}
 }
 
 func (nr *NodoRaft) enviarHeartbeat(nodo int, args *ArgAppendEntries,
@@ -472,10 +423,10 @@ func (nr *NodoRaft) enviarHeartbeat(nodo int, args *ArgAppendEntries,
 
 	// Completar....
 	nr.Logger.Println("envioHeartbeat")
-	error := nr.Nodos[nodo].CallTimeout("NodoRaft.AppendEntries", args, result, 10*time.Millisecond)
-	if error != nil {
-		return false
-	} else {
+	error := nr.Nodos[nodo].
+	CallTimeout("NodoRaft.AppendEntries", args, result, 10*time.Millisecond)
+	if error == nil {
+		//Si el mandato de la respuesta del heartbeat es mayor que el mio me convierto en follower y actualizo mi term
 		if result.Term > nr.CurrentTerm {
 			nr.Mux.Lock()
 			nr.CurrentTerm = result.Term
@@ -484,86 +435,62 @@ func (nr *NodoRaft) enviarHeartbeat(nodo int, args *ArgAppendEntries,
 			nr.Mux.Unlock()
 		}
 		return true
-	}
-
-}
-
-func (nr *NodoRaft) nuevaEntrada(nodo int, args *ArgAppendEntries,
-	result *Results) bool {
-	nr.Logger.Println("nuevaEntrada")
-	error := nr.Nodos[nodo].CallTimeout("NodoRaft.AppendEntries", args, result, 10*time.Millisecond)
-	if error != nil {
-		nr.Logger.Println("error-nuevaEntrada", error)
-		return false
 	} else {
-		if result.Success {
-			nr.MatchIndex[nodo] = nr.NextIndex[nodo]
-			nr.NextIndex[nodo]++
-			nr.Mux.Lock()
-			if nr.MatchIndex[nodo] > nr.CommitIndex {
-				nr.Replies++
-				if nr.Replies == len(nr.Nodos)/2 {
-					nr.CommitIndex++
-					nr.Replies = 0
-				}
-			}
-			nr.Mux.Unlock()
-		} else {
-			nr.NextIndex[nodo]--
-		}
-		return true
+		return false
 	}
+
 }
 
-func requestVotes(nr *NodoRaft) {
-	var reply RespuestaPeticionVoto
-	for i := 0; i < len(nr.Nodos); i++ {
-		if i != nr.Yo {
-			if len(nr.Log) != 0 {
-				lastLogIndex := len(nr.Log) - 1
-				lastLogTerm := nr.Log[lastLogIndex].Mandato
-				go nr.enviarPeticionVoto(i, &ArgsPeticionVoto{nr.CurrentTerm, nr.Yo, lastLogIndex, lastLogTerm}, &reply)
-			} else {
-				go nr.enviarPeticionVoto(i, &ArgsPeticionVoto{nr.CurrentTerm, nr.Yo, -1, 0}, &reply)
-			}
+
+
+
+// Metodo de tratamiento de llamadas RPC AppendEntries
+func (nr *NodoRaft) AppendEntries(args *ArgAppendEntries,
+	results *Results) error {
+	// Completar....
+	nr.Mux.Lock()
+	if args.Term == nr.CurrentTerm {
+		nr.IdLider = args.LeaderId
+		results.Term = nr.CurrentTerm
+		nr.HearbeatChannel <- true
+	} else {
+		nr.IdLider = args.LeaderId
+		results.Term = nr.CurrentTerm
+		if nr.Rol == "leader" {
+			nr.FollowerChannel <- true
+		} else {
+			nr.HearbeatChannel <- true
 		}
 	}
+
+	nr.Mux.Unlock()
+
+	return nil
 }
 
 func sendAppendEntries(nr *NodoRaft) {
 
 	var result Results
 	for i := 0; i < len(nr.Nodos); i++ {
-		
+
 		if i != nr.Yo {
-			if len(nr.Log)-1 >= nr.NextIndex[i] {
+			
+			var entries []Entry
 
-				entries := make([]Entry, 1)
-				entries[0] = Entry{nr.NextIndex[i], nr.Log[nr.NextIndex[i]].Mandato, nr.Log[nr.NextIndex[i]].Operacion}
+			if nr.NextIndex[i] != 0 {
+				prevLogIndex := nr.NextIndex[i] - 1
+				prevLogTerm := nr.Log[prevLogIndex].Mandato
+				go nr.enviarHeartbeat(i, 
+					&ArgAppendEntries{nr.CurrentTerm, nr.Yo, prevLogIndex, 
+						prevLogTerm, entries, nr.CommitIndex}, &result)
 
-				if nr.NextIndex[i] != 0 {
-					
-					prevLogIndex := nr.NextIndex[i] - 1
-					prevLogTerm := nr.Log[prevLogIndex].Mandato
-					go nr.nuevaEntrada(i, &ArgAppendEntries{nr.CurrentTerm, nr.Yo, prevLogIndex, prevLogTerm, entries, nr.CommitIndex}, &result)
-				} else {
-					
-					go nr.nuevaEntrada(i, &ArgAppendEntries{nr.CurrentTerm, nr.Yo, -1, 0, entries, nr.CommitIndex}, &result)
-
-				}
 			} else {
-				var entries []Entry
-				
-				if nr.NextIndex[i] != 0 {
-					prevLogIndex := nr.NextIndex[i] - 1
-					prevLogTerm := nr.Log[prevLogIndex].Mandato
-					go nr.enviarHeartbeat(i, &ArgAppendEntries{nr.CurrentTerm, nr.Yo, prevLogIndex, prevLogTerm, entries, nr.CommitIndex}, &result)
+				go nr.enviarHeartbeat(i, 
+					&ArgAppendEntries{nr.CurrentTerm, 
+						nr.Yo, -1, 0, entries, nr.CommitIndex}, &result)
 
-				} else {
-					go nr.enviarHeartbeat(i, &ArgAppendEntries{nr.CurrentTerm, nr.Yo, -1, 0, entries, nr.CommitIndex}, &result)
-
-				}
 			}
+			
 
 		}
 
@@ -575,19 +502,14 @@ func raftStates(nr *NodoRaft) {
 	time.Sleep(650 * time.Millisecond)
 	for {
 
-		if nr.CommitIndex > nr.LastApplied {
-			nr.LastApplied++
-			operacion := AplicaOperacion{nr.LastApplied, nr.Log[nr.LastApplied].Operacion}
-			nr.OperacionChannel <- operacion
-		}
-
 		for nr.Rol == "follower" {
 			nr.Logger.Println("soyFollower")
 			select {
 			case <-nr.HearbeatChannel:
 				nr.Logger.Println("reciboHeartbeat")
 				nr.Rol = "follower"
-			case <-time.After(time.Duration(rand.Intn(101)+100) * time.Millisecond):
+			case <-time.After(
+				time.Duration(rand.Intn(101)+100)*time.Millisecond):
 				nr.IdLider = -1
 				nr.Rol = "candidate"
 			}
@@ -595,17 +517,12 @@ func raftStates(nr *NodoRaft) {
 
 		for nr.Rol == "candidate" {
 			nr.Logger.Println("soyCandidate")
-			if nr.CommitIndex > nr.LastApplied {
-				nr.LastApplied++
-				operacion := AplicaOperacion{nr.LastApplied, nr.Log[nr.LastApplied].Operacion}
-				nr.OperacionChannel <- operacion
-			}
-
 			nr.CurrentTerm++
 			nr.VotedFor = nr.Yo
 			nr.MyVotes = 1
-			timer := time.NewTimer(time.Duration(rand.Intn(101)+100) * time.Millisecond)
-			requestVotes(nr)
+			timer := time.NewTimer(
+				time.Duration(rand.Intn(101)+100)*time.Millisecond)
+			startRequestVotes(nr)
 			select {
 			case <-nr.HearbeatChannel:
 				nr.Rol = "follower"
@@ -614,12 +531,6 @@ func raftStates(nr *NodoRaft) {
 			case <-timer.C:
 				nr.Rol = "candidate"
 			case <-nr.LeaderChannel:
-				for i := 0; i < len(nr.Nodos); i++ {
-					if i != nr.Yo {
-						nr.NextIndex[i] = len(nr.Log)
-						nr.MatchIndex[i] = -1
-					}
-				}
 				nr.Rol = "leader"
 			}
 		}

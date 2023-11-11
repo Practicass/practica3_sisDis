@@ -23,12 +23,17 @@ const (
 	MAQUINA1 = "127.0.0.1"
 	MAQUINA2 = "127.0.0.1"
 	MAQUINA3 = "127.0.0.1"
+	//MAQUINA1 = "192.168.3.18"
+	//MAQUINA2 = "192.168.3.19"
+	//MAQUINA3 = "192.168.3.20"
 
 	//puertos
 	PUERTOREPLICA1 = "29001"
 	PUERTOREPLICA2 = "29002"
 	PUERTOREPLICA3 = "29003"
-
+	//PUERTOREPLICA1 = "31040"
+	//PUERTOREPLICA2 = "31041"
+	//PUERTOREPLICA3 = "31042"
 	//nodos replicas
 	REPLICA1 = MAQUINA1 + ":" + PUERTOREPLICA1
 	REPLICA2 = MAQUINA2 + ":" + PUERTOREPLICA2
@@ -48,6 +53,8 @@ const (
 
 // PATH de los ejecutables de modulo golang de servicio Raft
 var PATH string = filepath.Join(os.Getenv("HOME"), "Escritorio", "3", "sistDis", "practica3_sisDis", "CodigoEsqueleto", "raft")
+
+//var PATH string = filepath.Join(os.Getenv("HOME"), "misc", "alumnos", "sd", "sd2324" , "a842255", "CodigoEsqueleto", "raft")
 
 // go run cmd/srvraft/main.go 0 127.0.0.1:29001 127.0.0.1:29002 127.0.0.1:29003
 var EXECREPLICACMD string = "cd " + PATH + "; go run " + EXECREPLICA
@@ -238,7 +245,6 @@ func (cfg *configDespliegue) tresOperacionesComprometidasEstable(t *testing.T) {
 
 	// Se ha elegido lider ?
 
-
 	// Parar réplicas alamcenamiento en remoto
 
 }
@@ -253,11 +259,9 @@ func (cfg *configDespliegue) AcuerdoApesarDeSeguidor(t *testing.T) {
 
 	//  Obtener un lider y, a continuación desconectar una de los nodos Raft
 
-
 	// Comprobar varios acuerdos con una réplica desconectada
 
 	// reconectar nodo Raft previamente desconectado y comprobar varios acuerdos
-
 
 }
 
@@ -267,14 +271,11 @@ func (cfg *configDespliegue) SinAcuerdoPorFallos(t *testing.T) {
 
 	// A completar ???
 
-
 	// Comprometer una entrada
-
 
 	//  Obtener un lider y, a continuación desconectar 2 de los nodos Raft
 
 	// Comprobar varios acuerdos con 2 réplicas desconectada
-
 
 	// reconectar lo2 nodos Raft  desconectados y probar varios acuerdos
 
@@ -285,7 +286,6 @@ func (cfg *configDespliegue) SometerConcurrentementeOperaciones(t *testing.T) {
 	t.Skip("SKIPPED SometerConcurrentementeOperaciones")
 
 	// un bucle para estabilizar la ejecucion
-
 
 	// Obtener un lider y, a continuación someter una operacion
 
@@ -307,7 +307,7 @@ func (cfg *configDespliegue) pruebaUnLider(numreplicas int) int {
 		mapaLideres := make(map[int][]int)
 		for i := 0; i < numreplicas; i++ {
 			if cfg.conectados[i] {
-				
+
 				if _, mandato, eslider, _ := cfg.obtenerEstadoRemoto(i); eslider {
 					mapaLideres[mandato] = append(mapaLideres[mandato], i)
 				}
@@ -409,5 +409,3 @@ func (cfg *configDespliegue) pararLider() {
 		}
 	}
 }
-
-
