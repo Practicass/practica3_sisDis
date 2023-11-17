@@ -195,7 +195,7 @@ func (nr *NodoRaft) obtenerEstado() (int, int, bool, int) {
 
 	// Vuestro codigo aqui
 	esLider = nr.Yo == nr.IdLider
-	
+
 	return yo, mandato, esLider, idLider
 }
 
@@ -299,8 +299,6 @@ type RespuestaPeticionVoto struct {
 	VoteGranted bool
 }
 
-
-
 type ArgAppendEntries struct {
 	// Vuestros datos aqui
 	Term         int
@@ -353,7 +351,7 @@ func (nr *NodoRaft) enviarPeticionVoto(nodo int, args *ArgsPeticionVoto,
 	// Completar....
 
 	error := nr.Nodos[nodo].
-	CallTimeout("NodoRaft.PedirVoto", args, reply, 10*time.Millisecond)
+		CallTimeout("NodoRaft.PedirVoto", args, reply, 10*time.Millisecond)
 	if error != nil {
 		return false
 	} else {
@@ -378,19 +376,20 @@ func (nr *NodoRaft) PedirVoto(peticion *ArgsPeticionVoto,
 	reply *RespuestaPeticionVoto) error {
 	// Vuestro codigo aqui
 	nr.Mux.Lock()
+	//si su mandato es menor que el mio
 	if peticion.Term < nr.CurrentTerm {
 		reply.Term = nr.CurrentTerm
 		reply.VoteGranted = false
 	} else if peticion.Term == nr.CurrentTerm &&
-		peticion.CandidateId != nr.VotedFor {
+		peticion.CandidateId != nr.VotedFor { // si tenemos el mismo mandato pero ya he votado a otro antes
 		reply.Term = nr.CurrentTerm
 		reply.VoteGranted = false
-	} else if peticion.Term > nr.CurrentTerm {
+	} else if peticion.Term > nr.CurrentTerm { //si su mandato es mayor que el mio
 		nr.CurrentTerm = peticion.Term
 		nr.VotedFor = peticion.CandidateId
 		reply.Term = nr.CurrentTerm
 		reply.VoteGranted = true
-		
+
 		if nr.Rol == "candidate" || nr.Rol == "leader" {
 			nr.FollowerChannel <- true
 		}
@@ -407,11 +406,11 @@ func startRequestVotes(nr *NodoRaft) {
 				lastLogIndex := len(nr.Log) - 1
 				lastLogTerm := nr.Log[lastLogIndex].Mandato
 				go nr.enviarPeticionVoto(i,
-					&ArgsPeticionVoto{nr.CurrentTerm, nr.Yo, 
+					&ArgsPeticionVoto{nr.CurrentTerm, nr.Yo,
 						lastLogIndex, lastLogTerm}, &reply)
 			} else {
-				go nr.enviarPeticionVoto(i, 
-					&ArgsPeticionVoto{nr.CurrentTerm, nr.Yo, 
+				go nr.enviarPeticionVoto(i,
+					&ArgsPeticionVoto{nr.CurrentTerm, nr.Yo,
 						-1, 0}, &reply)
 			}
 		}
@@ -424,7 +423,7 @@ func (nr *NodoRaft) enviarHeartbeat(nodo int, args *ArgAppendEntries,
 	// Completar....
 	nr.Logger.Println("envioHeartbeat")
 	error := nr.Nodos[nodo].
-	CallTimeout("NodoRaft.AppendEntries", args, result, 10*time.Millisecond)
+		CallTimeout("NodoRaft.AppendEntries", args, result, 10*time.Millisecond)
 	if error == nil {
 		//Si el mandato de la respuesta del heartbeat es mayor que el mio me convierto en follower y actualizo mi term
 		if result.Term > nr.CurrentTerm {
@@ -440,9 +439,6 @@ func (nr *NodoRaft) enviarHeartbeat(nodo int, args *ArgAppendEntries,
 	}
 
 }
-
-
-
 
 // Metodo de tratamiento de llamadas RPC AppendEntries
 func (nr *NodoRaft) AppendEntries(args *ArgAppendEntries,
@@ -474,23 +470,12 @@ func sendAppendEntries(nr *NodoRaft) {
 	for i := 0; i < len(nr.Nodos); i++ {
 
 		if i != nr.Yo {
-			
+
 			var entries []Entry
 
-			if nr.NextIndex[i] != 0 {
-				prevLogIndex := nr.NextIndex[i] - 1
-				prevLogTerm := nr.Log[prevLogIndex].Mandato
-				go nr.enviarHeartbeat(i, 
-					&ArgAppendEntries{nr.CurrentTerm, nr.Yo, prevLogIndex, 
-						prevLogTerm, entries, nr.CommitIndex}, &result)
-
-			} else {
-				go nr.enviarHeartbeat(i, 
-					&ArgAppendEntries{nr.CurrentTerm, 
-						nr.Yo, -1, 0, entries, nr.CommitIndex}, &result)
-
-			}
-			
+			go nr.enviarHeartbeat(i,
+				&ArgAppendEntries{nr.CurrentTerm,
+					nr.Yo, -1, 0, entries, nr.CommitIndex}, &result)
 
 		}
 
@@ -509,7 +494,7 @@ func raftStates(nr *NodoRaft) {
 				nr.Logger.Println("reciboHeartbeat")
 				nr.Rol = "follower"
 			case <-time.After(
-				time.Duration(rand.Intn(101)+100)*time.Millisecond):
+				time.Duration(rand.Intn(101)+100) * time.Millisecond):
 				nr.IdLider = -1
 				nr.Rol = "candidate"
 			}
@@ -521,7 +506,7 @@ func raftStates(nr *NodoRaft) {
 			nr.VotedFor = nr.Yo
 			nr.MyVotes = 1
 			timer := time.NewTimer(
-				time.Duration(rand.Intn(101)+100)*time.Millisecond)
+				time.Duration(rand.Intn(101)+100) * time.Millisecond)
 			startRequestVotes(nr)
 			select {
 			case <-nr.HearbeatChannel:
