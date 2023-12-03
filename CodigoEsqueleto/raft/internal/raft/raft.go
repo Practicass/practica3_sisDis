@@ -261,7 +261,6 @@ func (nr *NodoRaft) someterOperacion(operacion TipoOperacion) (int, int,
 			idLider = nr.IdLider
 	
 		}
-		nr.Logger.Println("fin-someter")
 		return indice, mandato, EsLider, idLider, valorADevolver
 
 }
@@ -419,8 +418,6 @@ func (nr *NodoRaft) PedirVoto(peticion *ArgsPeticionVoto,
 	reply *RespuestaPeticionVoto) error {
 	// Vuestro codigo aqui
 	nr.Mux.Lock()
-	nr.Logger.Println("lock")
-
 	//si su mandato es menor que el mio
 	if peticion.Term < nr.CurrentTerm {
 		reply.Term = nr.CurrentTerm
@@ -431,15 +428,21 @@ func (nr *NodoRaft) PedirVoto(peticion *ArgsPeticionVoto,
 		reply.VoteGranted = false
 	} else if peticion.Term > nr.CurrentTerm { //si su mandato es mayor que el mio
 		nr.CurrentTerm = peticion.Term
-		nr.VotedFor = peticion.CandidateId
 		reply.Term = nr.CurrentTerm
-		reply.VoteGranted = true
+		//si el log esta vacio o el ultimo mandato es mayor que el mio o el ultimo mandato es igual pero el indice es mayor
+		if len(nr.Log) == 0 || peticion.LastLogTerm > nr.Log[len(nr.Log)-1].Mandato ||
+		(peticion.LastLogTerm == nr.Log[len(nr.Log)-1].Mandato && peticion.LastLogIndex >= len(nr.Log)-1) {
+
+			nr.VotedFor = peticion.CandidateId
+			reply.VoteGranted = true
+		}else{
+			reply.VoteGranted = false
+		}
 
 		if nr.Rol == "candidate" || nr.Rol == "leader" {
 			nr.FollowerChannel <- true
 		}
 	}
-	nr.Logger.Println("unlock")
 
 	nr.Mux.Unlock()
 	return nil
@@ -476,12 +479,10 @@ func (nr *NodoRaft) enviarHeartbeat(nodo int, args *ArgAppendEntries,
 		//Si el mandato de la respuesta del heartbeat es mayor que el mio me convierto en follower y actualizo mi term
 		if result.Term > nr.CurrentTerm {
 			nr.Mux.Lock()
-			nr.Logger.Println("lock")
 
 			nr.CurrentTerm = result.Term
 			nr.IdLider = -1
 			nr.FollowerChannel <- true
-			nr.Logger.Println("unlock")
 
 			nr.Mux.Unlock()
 		}
@@ -500,44 +501,36 @@ func (nr *NodoRaft) AppendEntries(args *ArgAppendEntries,
 	// Completar....
 	nr.Logger.Println("AppendEntries", args.LeaderCommit, nr.CommitIndex )
 	nr.Mux.Lock()
-	nr.Logger.Println("lock")
 
 	if args.Term < nr.CurrentTerm {
-		nr.Logger.Println("AppendEntries1")
 		results.Term = nr.CurrentTerm
 		results.Success = false
 	} else if args.Term == nr.CurrentTerm {
-		nr.Logger.Println("AppendEntries2")
 		nr.IdLider = args.LeaderId
 		results.Term = nr.CurrentTerm
+		//como el log esta vacio no va a haber conflicto con entradas anteriores asi que añadimos las nuevas
 		if len(nr.Log) == 0 {
-			nr.Logger.Println("AppendEntries2.1")
-
-			if len(args.Entries) != 0 {
-				nr.Log = append(nr.Log, args.Entries...)
-
-			}
+			nr.Log = append(nr.Log, args.Entries...)
 			results.Success = true
+			//si hay conflicto con entradas anteriores entre el lider y el follower
 		} else if args.PrevLogIndex > len(nr.Log)-1 || nr.Log[args.PrevLogIndex].Mandato != args.PrevLogTerm {
-			nr.Logger.Println("AppendEntries2.2")
-
 			results.Success = false
 		} else {
-			nr.Logger.Println("AppendEntries2.3")
-			if len(args.Entries) != 0 {
-				nr.Log = nr.Log[0 : args.PrevLogIndex+1]
-				nr.Log = append(nr.Log, args.Entries...)
 
-			}
+			nr.Log = nr.Log[0 : args.PrevLogIndex+1]
+			nr.Log = append(nr.Log, args.Entries...)
 			results.Success = true
 		}
+		
 		if args.LeaderCommit > nr.CommitIndex {
-			nr.Logger.Println("AppendEntries2x")
-			nr.CommitIndex = min(args.LeaderCommit, len(nr.Log)-1)
+			if(args.LeaderCommit < len(nr.Log)-1){
+				nr.CommitIndex = args.LeaderCommit
+			}else{
+				nr.CommitIndex = len(nr.Log)-1
+			}
 		}
 		nr.HearbeatChannel <- true
 	} else {
-		nr.Logger.Println("AppendEntries3")
 		nr.IdLider = args.LeaderId
 		nr.CurrentTerm = args.Term
 		results.Term = nr.CurrentTerm
@@ -545,12 +538,15 @@ func (nr *NodoRaft) AppendEntries(args *ArgAppendEntries,
 			nr.FollowerChannel <- true
 		} else {
 			if args.LeaderCommit > nr.CommitIndex {
-				nr.CommitIndex = min(args.LeaderCommit, len(nr.Log)-1)
+				if(args.LeaderCommit < len(nr.Log)-1){
+					nr.CommitIndex = args.LeaderCommit
+				}else{
+					nr.CommitIndex = len(nr.Log)-1
+				}			
 			}
 			nr.HearbeatChannel <- true
 		}
 	}		
-	nr.Logger.Println("unlock")
 
 	nr.Mux.Unlock()
 
@@ -586,7 +582,6 @@ func sendAppendEntries(nr *NodoRaft) {
 					prevLogIndex := nr.NextIndex[i] - 1
 					prevLogTerm := nr.Log[prevLogIndex].Mandato
 					go nr.enviarHeartbeat(i, &ArgAppendEntries{nr.CurrentTerm, nr.Yo, prevLogIndex, prevLogTerm, entries, nr.CommitIndex}, &result)
-					nr.Logger.Println("adiosHeartbeat")
 				} else {
 					go nr.enviarHeartbeat(i, &ArgAppendEntries{nr.CurrentTerm, nr.Yo, -1, 0, entries, nr.CommitIndex}, &result)
 
@@ -613,8 +608,6 @@ func (nr *NodoRaft) nuevaEntrada(nodo int, args *ArgAppendEntries,
 			nr.Logger.Println("nuevaEntrada-exito", result.Success, nr.CommitIndex)
 
 			nr.Mux.Lock()
-			nr.Logger.Println("lock")
-			nr.Logger.Println("nuevaEntrada-exito1", result.Success, nr.CommitIndex)
 
 			if nr.MatchIndex[nodo] > nr.CommitIndex {
 				nr.Replies++
@@ -623,8 +616,6 @@ func (nr *NodoRaft) nuevaEntrada(nodo int, args *ArgAppendEntries,
 					nr.Replies = 0
 				}
 			}
-			nr.Logger.Println("nuevaEntrada-exito2", nr.CommitIndex)
-			nr.Logger.Println("unlock")
 
 			nr.Mux.Unlock()
 		} else {
@@ -641,7 +632,6 @@ func raftStates(nr *NodoRaft) {
 	for {
 
 		if nr.CommitIndex > nr.LastApplied {
-			nr.Logger.Print("ADIOS")
 			nr.LastApplied++
 			operacion := AplicaOperacion{nr.LastApplied, nr.Log[nr.LastApplied].Operacion}
 			nr.OperacionChannel <- operacion

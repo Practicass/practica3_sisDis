@@ -574,7 +574,7 @@ func (cfg *configDespliegue) comprobarEstadosIguales(indiceEsperado int) {
 		indices[i], mandatos[i] = reply.Indice, reply.Mandato
 	}
 	if indices[0] != indiceEsperado {
-		cfg.t.Fatalf("Avance de Ã­ndice de registro incorrecto en subtest %s",
+		cfg.t.Fatalf("Avance de indice de registro incorrecto en subtest %s",
 			cfg.t.Name())
 	}
 	for i := 1; i < cfg.numReplicas; i++ {
