@@ -398,9 +398,7 @@ func (nr *NodoRaft) enviarPeticionVoto(nodo int, args *ArgsPeticionVoto,
 			nr.FollowerChannel <- true
 		} else if reply.VoteGranted {
 			nr.Mux.Lock()
-			nr.Logger.Println("lock")
 			nr.MyVotes++
-			nr.Logger.Println("unlock")
 
 			nr.Mux.Unlock()
 			if nr.MyVotes > len(nr.Nodos)/2 {
